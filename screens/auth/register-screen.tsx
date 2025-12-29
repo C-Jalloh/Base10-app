@@ -1,16 +1,16 @@
 import { ActionButton, AppColors, Logo, TextInputField } from '@/components/ui';
 import { authApi } from '@/lib/api';
+import { deviceBehavior } from '@/utils/helpers';
 import { Ionicons } from '@expo/vector-icons';
 import { Link, router } from 'expo-router';
 import React, { useEffect, useState } from 'react';
 import {
     Alert,
     KeyboardAvoidingView,
-    Platform,
     ScrollView,
     StyleSheet,
     Text,
-    View,
+    View
 } from 'react-native';
 
 const RegisterScreen = () => {
@@ -81,7 +81,7 @@ const RegisterScreen = () => {
   return (
     <KeyboardAvoidingView
       style={{ flex: 1, width: '100%', backgroundColor: AppColors.background }}
-      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+      behavior={deviceBehavior()}
     >
       {/* Background Decorative Elements */}
       <View style={styles.bgCircle1} />

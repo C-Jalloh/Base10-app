@@ -1,3 +1,4 @@
+import { AppColors } from '@/constants/app-colors';
 import RegisterScreen from '@/screens/auth/register-screen';
 import React from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -7,9 +8,7 @@ const Screen = () => {
     <SafeAreaView
       style={{
         flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#121212',
+        backgroundColor: AppColors.background,
       }}
     >
       <RegisterScreen />

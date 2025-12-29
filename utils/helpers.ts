@@ -11,7 +11,7 @@ export const isIPad = () => {
 };
 
 export const deviceBehavior = () => {
-  return Platform.OS === 'ios' ? 'padding' : 'height';
+  return Platform.OS === 'ios' ? 'padding' : undefined;
 };
 
 export const getiPhoneModel = () => {

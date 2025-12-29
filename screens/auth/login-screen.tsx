@@ -86,7 +86,7 @@ const LoginScreen = () => {
 
         <View style={styles.forgotPasswordContainer}>
           <Link href='/forgot-password'>
-            <Text style={styles.forgotPasswordText}>Forgot?</Text>
+            <Text style={styles.forgotPasswordText}>Forgot Password?</Text>
           </Link>
         </View>
 
@@ -99,7 +99,7 @@ const LoginScreen = () => {
         <View style={styles.footer}>
           <Text style={styles.footerText}>Don&apos;t have an account? </Text>
           <Link href='/register'>
-            <Text style={styles.linkText}>Create one for free</Text>
+            <Text style={styles.linkText}>Create an account</Text>
           </Link>
         </View>
       </ScrollView>
