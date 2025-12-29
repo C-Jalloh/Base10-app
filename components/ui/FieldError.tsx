@@ -1,7 +1,7 @@
 
 import { AppColors } from '@/constants/app-colors';
 import React from 'react';
-import { Text, Animated, StyleSheet } from 'react-native';
+import { Animated, StyleSheet, Text } from 'react-native';
 
 type FieldErrorProps = {
   message?: string;
@@ -52,7 +52,7 @@ export const FieldError: React.FC<FieldErrorProps> = ({ message }) => {
 
 const styles = StyleSheet.create({
   errorText: {
-    color: AppColors.redColor,
+    color: AppColors.error,
     fontSize: 14,
   },
 });

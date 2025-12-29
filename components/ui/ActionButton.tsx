@@ -3,9 +3,9 @@ import { actionButtonStyles } from '@/styles/action-button-styles';
 import { getDeviceDimensions } from '@/utils/helpers';
 import React, { useEffect, useRef } from 'react';
 import type {
-  ColorValue,
-  DimensionValue,
-  GestureResponderEvent,
+    ColorValue,
+    DimensionValue,
+    GestureResponderEvent,
 } from 'react-native';
 import { Animated, Text, TouchableOpacity } from 'react-native';
 
@@ -15,8 +15,8 @@ const ActionButton = ({
   onPress,
   text,
   width,
-  backgroundColor = AppColors.foreground,
-  color = AppColors.textColor,
+  backgroundColor = AppColors.primary,
+  color = AppColors.textInverted,
   children,
 }: {
   isEnabled: boolean;
