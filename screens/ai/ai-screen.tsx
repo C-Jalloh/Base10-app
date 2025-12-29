@@ -1,7 +1,7 @@
 import { View, Text } from "react-native";
 import React from "react";
 
-const HomeScreen = () => {
+const AIScreen = () => {
   return (
     <View
       style={{
@@ -11,9 +11,9 @@ const HomeScreen = () => {
         alignItems: "center",
       }}
     >
-      <Text style={{ color: "#333" }}>HomeScreen</Text>
+      <Text style={{ color: "#333" }}>AI Screen</Text>
     </View>
   );
 };
 
-export default HomeScreen;
+export default AIScreen;

@@ -1,6 +1,6 @@
-import LoginScreen from "@/screens/auth/login-screen";
 import React from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
+import ClassRoomScreen from "@/screens/class-room/class-room-screen";
 
 const Screen = () => {
   return (
@@ -12,7 +12,7 @@ const Screen = () => {
         backgroundColor: "#121212",
       }}
     >
-      <LoginScreen />
+      <ClassRoomScreen />
     </SafeAreaView>
   );
 };
