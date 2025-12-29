@@ -1,20 +1,20 @@
+import { AppColors } from '@/constants/app-colors';
+import { textInputStyles } from '@/styles/textInput-styles';
+import type { InputFieldProps } from '@/types/inputs';
+import { deviceBehavior } from '@/utils/helpers';
+import { Ionicons } from '@expo/vector-icons';
 import type { FC } from 'react';
 import React, { useState } from 'react';
 import {
-  KeyboardAvoidingView,
-  TouchableWithoutFeedback,
-  View,
-  Text,
-  TextInput,
-  Keyboard,
-  Pressable,
+    Keyboard,
+    KeyboardAvoidingView,
+    Pressable,
+    Text,
+    TextInput,
+    TouchableWithoutFeedback,
+    View,
 } from 'react-native';
 import { FieldError } from './FieldError';
-import { deviceBehavior } from '@/utils/helpers';
-import { textInputStyles } from '@/styles/textInput-styles';
-import type { InputFieldProps } from '@/types/inputs';
-import { AppColors } from '@/constants/app-colors';
-import { Ionicons } from '@expo/vector-icons';
 
 const TextInputField: FC<InputFieldProps> = ({
   inputStyle,
@@ -77,7 +77,7 @@ const TextInputField: FC<InputFieldProps> = ({
               autoCapitalize='none'
               spellCheck={false}
               clearButtonMode='while-editing'
-              placeholderTextColor={AppColors.textColor}
+              placeholderTextColor={AppColors.gray500}
               {...props}
             />
             {secureTextEntry && (
@@ -86,9 +86,9 @@ const TextInputField: FC<InputFieldProps> = ({
                 onPress={() => setHidePassword(!hidePassword)}
               >
                 {hidePassword ? (
-                  <Ionicons name='eye' size={20} color={AppColors.textColor}  />
+                  <Ionicons name='eye' size={20} color={AppColors.gray500}  />
                 ) : (
-                  <Ionicons name='eye-off' size={20} color={AppColors.textColor} />
+                  <Ionicons name='eye-off' size={20} color={AppColors.gray500} />
                 )}
               </Pressable>
             )}

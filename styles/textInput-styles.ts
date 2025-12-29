@@ -1,3 +1,4 @@
+import { AppColors } from '@/constants/app-colors';
 import { StyleSheet } from 'react-native';
 
 export const textInputStyles = StyleSheet.create({
@@ -6,24 +7,25 @@ export const textInputStyles = StyleSheet.create({
     marginVertical: 2,
   },
   label: {
-    color: '#374151',
+    color: AppColors.textSecondary,
     fontSize: 14,
     fontFamily: 'MontserratMedium',
     marginBottom: 3,
   },
   inputContainer: {
     width: '100%',
-    backgroundColor: '#121212',
+    backgroundColor: AppColors.slate800,
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
     borderWidth: 1,
+    borderColor: AppColors.slate700,
   },
   defaultBorder: {
-    borderColor: '#444',
+    borderColor: AppColors.slate700,
   },
   errorBorder: {
-    borderColor: '#ef4444',
+    borderColor: AppColors.error,
   },
   iconContainer: {
     marginLeft: 10,
@@ -37,7 +39,7 @@ export const textInputStyles = StyleSheet.create({
     fontFamily: 'MontserratMedium',
     fontSize: 14,
     backgroundColor: 'transparent',
-    color: '#374151',
+    color: AppColors.textPrimary,
     textAlign: 'left',
   },
   iconPressable: {
@@ -48,7 +50,7 @@ export const textInputStyles = StyleSheet.create({
   },
   errorText: {
     fontSize: 12,
-    color: '#ef4444',
+    color: AppColors.error,
     fontFamily: 'MontserratRegular',
     marginTop: 4,
   },

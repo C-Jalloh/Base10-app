@@ -4,26 +4,33 @@
  */
 
 import { Platform } from 'react-native';
+import { AppColors } from './app-colors';
 
-const tintColorLight = '#0a7ea4';
-const tintColorDark = '#fff';
+const tintColorLight = AppColors.primary;
+const tintColorDark = AppColors.primary;
 
 export const Colors = {
   light: {
-    text: '#11181C',
-    background: '#fff',
-    tint: tintColorLight,
-    icon: '#687076',
-    tabIconDefault: '#687076',
-    tabIconSelected: tintColorLight,
+    text: '#0F172A', // --text-primary
+    background: '#FFFFFF', // --bg-primary
+    tint: AppColors.primary,
+    icon: '#475569', // --text-secondary
+    tabIconDefault: '#475569',
+    tabIconSelected: AppColors.primary,
+    secondaryBackground: '#F8FAFC', // --bg-secondary
+    tertiaryBackground: '#F1F5F9', // --bg-tertiary
+    border: '#E2E8F0', // --border-color
   },
   dark: {
-    text: '#ECEDEE',
-    background: '#151718',
-    tint: tintColorDark,
-    icon: '#9BA1A6',
-    tabIconDefault: '#9BA1A6',
-    tabIconSelected: tintColorDark,
+    text: '#F8FAFC', // --text-primary
+    background: '#0F172A', // --bg-primary
+    tint: AppColors.primary,
+    icon: '#94A3B8', // --text-secondary
+    tabIconDefault: '#94A3B8',
+    tabIconSelected: AppColors.primary,
+    secondaryBackground: '#020617', // --bg-secondary
+    tertiaryBackground: '#1E293B', // --bg-tertiary
+    border: '#1E293B', // --border-color
   },
 };
 

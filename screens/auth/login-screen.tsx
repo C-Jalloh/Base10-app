@@ -1,96 +1,188 @@
-import ActionButton from '@/components/ui/ActionButton';
-import TextInputField from '@/components/ui/TextInputField';
-import { AppColors } from '@/constants/app-colors';
+import { ActionButton, AppColors, Logo, TextInputField } from '@/components/ui';
+import { authApi } from '@/lib/api';
 import { deviceBehavior } from '@/utils/helpers';
+import { Ionicons } from '@expo/vector-icons';
+import { Link, router } from 'expo-router';
 import React, { useState } from 'react';
-import { Alert, KeyboardAvoidingView, ScrollView, Text } from 'react-native';
-import { Link } from 'expo-router';
+import { Alert, KeyboardAvoidingView, ScrollView, StyleSheet, Text, View } from 'react-native';
 
 const LoginScreen = () => {
-  const [email, setEmail] = useState('');
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
 
-  const handleLogin = () => {
-    if (!email || !password) {
-      Alert.alert('Error', 'Please enter email and password');
+  const handleLogin = async () => {
+    if (!username || !password) {
+      Alert.alert('Error', 'Please enter email/phone and password');
       return;
     }
-    // TODO: Implement login logic
-    Alert.alert('Login', 'Login functionality not implemented yet');
+    
+    setLoading(true);
+    setError('');
+    
+    try {
+      const response = await authApi.login(username, password);
+      console.log('Login successful:', response.data.user.full_name);
+      
+      // In a real app, we would save the token here
+      // For now, we just navigate to the home screen
+      router.replace('/(root)/(tabs)/home');
+    } catch (err: any) {
+      const errorMessage = err.response?.data?.detail || 'Login failed. Please check your credentials.';
+      setError(errorMessage);
+      Alert.alert('Login Failed', errorMessage);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
     <KeyboardAvoidingView
-      style={{ flex: 1, width: '100%' }}
+      style={{ flex: 1, width: '100%', backgroundColor: AppColors.background }}
       behavior={deviceBehavior()}
     >
+      {/* Background Decorative Elements */}
+      <View style={styles.bgCircle1} />
+      <View style={styles.bgCircle2} />
+
       <ScrollView
         contentContainerStyle={{
           flexGrow: 1,
           justifyContent: 'center',
-          alignItems: 'center',
-          paddingHorizontal: 16,
-          backgroundColor: AppColors.background,
+          paddingHorizontal: 24,
         }}
         keyboardShouldPersistTaps='handled'
       >
-        <Text
-          style={{
-            fontSize: 32,
-            fontWeight: 'bold',
-            color: AppColors.lightText,
-            marginBottom: 40,
-          }}
-        >
-          Login
-        </Text>
+        <View style={styles.headerContainer}>
+          <Logo size={56} centered />
+          <Text style={styles.title}>Sign In</Text>
+          <Text style={styles.subtitle}>Enter your details to continue</Text>
+        </View>
+
         <TextInputField
-          label='Email'
-          placeholder='Enter your email'
-          value={email}
-          onChangeText={setEmail}
+          label='Email or Phone'
+          placeholder='Email or Phone Number'
+          value={username}
+          onChangeText={setUsername}
           keyboardType='email-address'
           autoCapitalize='none'
-          labelStyle={{ color: AppColors.lightText }}
+          Icon={Ionicons}
+          iconProps={{ name: 'mail', color: AppColors.slate400 }}
+          error={error}
         />
+        
+        <View style={{ height: 12 }} />
+
         <TextInputField
           label='Password'
-          placeholder='Enter your password'
+          placeholder='••••••••'
           value={password}
           onChangeText={setPassword}
           secureTextEntry
-          labelStyle={{ color: AppColors.lightText }}
+          Icon={Ionicons}
+          iconProps={{ name: 'lock-closed', color: AppColors.slate400 }}
         />
+
+        <View style={styles.forgotPasswordContainer}>
+          <Link href='/forgot-password'>
+            <Text style={styles.forgotPasswordText}>Forgot?</Text>
+          </Link>
+        </View>
+
         <ActionButton
-          text='Login'
-          isEnabled={!!email && !!password}
+          text={loading ? 'Signing In...' : 'Sign In'}
+          isEnabled={!!username && !!password && !loading}
           onPress={handleLogin}
-          backgroundColor={AppColors.foreground}
-          color={AppColors.background}
         />
-        <Link href='/forgot-password' style={{ marginTop: 20 }}>
-          <Text
-            style={{
-              color: AppColors.lightGray,
-              textDecorationLine: 'underline',
-            }}
-          >
-            Forgot Password?
-          </Text>
-        </Link>
-        <Link href='/register' style={{ marginTop: 10 }}>
-          <Text
-            style={{
-              color: AppColors.foreground,
-              textDecorationLine: 'underline',
-            }}
-          >
-            Don&apos;t have an account? Register
-          </Text>
-        </Link>
+
+        <View style={styles.footer}>
+          <Text style={styles.footerText}>Don&apos;t have an account? </Text>
+          <Link href='/register'>
+            <Text style={styles.linkText}>Create one for free</Text>
+          </Link>
+        </View>
       </ScrollView>
     </KeyboardAvoidingView>
   );
 };
+
+const styles = StyleSheet.create({
+  bgCircle1: {
+    position: 'absolute',
+    top: -100,
+    left: -100,
+    width: 300,
+    height: 300,
+    borderRadius: 150,
+    backgroundColor: AppColors.primary,
+    opacity: 0.05,
+  },
+  bgCircle2: {
+    position: 'absolute',
+    bottom: -100,
+    right: -100,
+    width: 300,
+    height: 300,
+    borderRadius: 150,
+    backgroundColor: '#3B82F6', // blue-500 equivalent
+    opacity: 0.05,
+  },
+  headerContainer: {
+    marginBottom: 40,
+  },
+  logoContainer: {
+    width: 56,
+    height: 56,
+    borderRadius: 16,
+    backgroundColor: AppColors.primary,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: 24,
+    shadowColor: AppColors.primary,
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.2,
+    shadowRadius: 8,
+    elevation: 5,
+  },
+  title: {
+    fontSize: 32,
+    fontFamily: 'MontserratBold',
+    color: AppColors.textPrimary,
+    marginBottom: 8,
+  },
+  subtitle: {
+    fontSize: 16,
+    fontFamily: 'MontserratMedium',
+    color: AppColors.textSecondary,
+  },
+  forgotPasswordContainer: {
+    alignItems: 'flex-end',
+    marginTop: -8,
+    marginBottom: 24,
+  },
+  forgotPasswordText: {
+    color: AppColors.primary,
+    fontFamily: 'MontserratBold',
+    fontSize: 12,
+    textTransform: 'uppercase',
+    letterSpacing: 1,
+  },
+  footer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    marginTop: 32,
+  },
+  footerText: {
+    color: AppColors.textSecondary,
+    fontFamily: 'MontserratMedium',
+    fontSize: 14,
+  },
+  linkText: {
+    color: AppColors.primary,
+    fontFamily: 'MontserratBold',
+    fontSize: 14,
+  },
+});
 
 export default LoginScreen;
