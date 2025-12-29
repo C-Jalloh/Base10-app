@@ -1,13 +1,20 @@
-import { Text } from 'react-native'
-import React from 'react'
-import { SafeAreaView } from 'react-native-safe-area-context'
+import React from "react";
+import { SafeAreaView } from "react-native-safe-area-context";
+import PracticeScreen from "@/screens/practice/practice-screen";
 
 const Screen = () => {
   return (
-    <SafeAreaView>
-      <Text>Screen</Text>
+    <SafeAreaView
+      style={{
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+        backgroundColor: "#121212",
+      }}
+    >
+      <PracticeScreen />
     </SafeAreaView>
-  )
-}
+  );
+};
 
-export default Screen
+export default Screen;
