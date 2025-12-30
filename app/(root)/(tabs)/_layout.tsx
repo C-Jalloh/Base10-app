@@ -14,6 +14,7 @@ export default function TabLayout() {
           borderTopColor: AppColors.slate800,
         },
         tabBarActiveTintColor: AppColors.primary,
+        tabBarInactiveTintColor: AppColors.iconInactive,
         headerShown: false,
         tabBarButton: HapticTab,
       }}

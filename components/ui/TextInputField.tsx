@@ -33,9 +33,22 @@ const TextInputField: FC<InputFieldProps> = ({
   width = 18,
   height = 18,
   error,
+  onFocus,
+  onBlur,
   ...props
 }) => {
   const [hidePassword, setHidePassword] = useState(secureTextEntry);
+  const [isFocused, setIsFocused] = useState(false);
+
+  const handleFocus = (e: any) => {
+    setIsFocused(true);
+    onFocus?.(e);
+  };
+
+  const handleBlur = (e: any) => {
+    setIsFocused(false);
+    onBlur?.(e);
+  };
 
   return (
     <KeyboardAvoidingView behavior={deviceBehavior()}>
@@ -49,7 +62,9 @@ const TextInputField: FC<InputFieldProps> = ({
               textInputStyles.inputContainer,
               error
                 ? textInputStyles.errorBorder
-                : textInputStyles.defaultBorder,
+                : isFocused 
+                  ? { borderColor: AppColors.primary, borderWidth: 1.5 }
+                  : textInputStyles.defaultBorder,
               {
                 marginBottom: 12,
                 marginTop: 6,
@@ -60,9 +75,13 @@ const TextInputField: FC<InputFieldProps> = ({
               },
             ]}
           >
-            {Icon && iconProps && (
+            {Icon && (
               <View style={[textInputStyles.iconContainer]}>
-                <Icon size={24} {...iconProps} />
+                <Icon 
+                  size={24} 
+                  {...iconProps} 
+                  color={isFocused ? AppColors.iconActive : AppColors.iconInactive}
+                />
               </View>
             )}
             <TextInput
@@ -77,7 +96,9 @@ const TextInputField: FC<InputFieldProps> = ({
               autoCapitalize='none'
               spellCheck={false}
               clearButtonMode='while-editing'
-              placeholderTextColor={AppColors.gray500}
+              placeholderTextColor={AppColors.placeholder}
+              onFocus={handleFocus}
+              onBlur={handleBlur}
               {...props}
             />
             {secureTextEntry && (
@@ -86,9 +107,9 @@ const TextInputField: FC<InputFieldProps> = ({
                 onPress={() => setHidePassword(!hidePassword)}
               >
                 {hidePassword ? (
-                  <Ionicons name='eye' size={20} color={AppColors.gray500}  />
+                  <Ionicons name='eye' size={20} color={isFocused ? AppColors.iconActive : AppColors.iconInactive}  />
                 ) : (
-                  <Ionicons name='eye-off' size={20} color={AppColors.gray500} />
+                  <Ionicons name='eye-off' size={20} color={isFocused ? AppColors.iconActive : AppColors.iconInactive} />
                 )}
               </Pressable>
             )}

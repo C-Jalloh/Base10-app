@@ -1,10 +1,9 @@
 import { ActionButton, AppColors, Logo, TextInputField } from '@/components/ui';
 import { authApi } from '@/lib/api';
-import { deviceBehavior } from '@/utils/helpers';
 import { Ionicons } from '@expo/vector-icons';
 import { Link, router } from 'expo-router';
 import React, { useState } from 'react';
-import { Alert, KeyboardAvoidingView, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { Alert, KeyboardAvoidingView, Platform, ScrollView, StyleSheet, Text, View } from 'react-native';
 
 const LoginScreen = () => {
   const [username, setUsername] = useState('');
@@ -39,20 +38,25 @@ const LoginScreen = () => {
 
   return (
     <KeyboardAvoidingView
-      style={{ flex: 1, width: '100%', backgroundColor: AppColors.background }}
-      behavior={deviceBehavior()}
+      style={{ flex: 1, backgroundColor: AppColors.background }}
+      behavior={Platform.OS === 'ios' ? 'padding' : 'padding'}
+      keyboardVerticalOffset={Platform.OS === 'ios' ? 0 : 0}
     >
       {/* Background Decorative Elements */}
       <View style={styles.bgCircle1} />
       <View style={styles.bgCircle2} />
 
       <ScrollView
+        style={{ flex: 1 }}
         contentContainerStyle={{
           flexGrow: 1,
-          justifyContent: 'center',
           paddingHorizontal: 24,
+          paddingBottom: 120, // Significant padding at bottom to allow scrolling past the keyboard
+          paddingTop: 60,
         }}
         keyboardShouldPersistTaps='handled'
+        keyboardDismissMode='on-drag'
+        showsVerticalScrollIndicator={true}
       >
         <View style={styles.headerContainer}>
           <Logo size={56} centered />
@@ -68,7 +72,7 @@ const LoginScreen = () => {
           keyboardType='email-address'
           autoCapitalize='none'
           Icon={Ionicons}
-          iconProps={{ name: 'mail', color: AppColors.slate400 }}
+          iconProps={{ name: 'mail' }}
           error={error}
         />
         
@@ -81,7 +85,7 @@ const LoginScreen = () => {
           onChangeText={setPassword}
           secureTextEntry
           Icon={Ionicons}
-          iconProps={{ name: 'lock-closed', color: AppColors.slate400 }}
+          iconProps={{ name: 'lock-closed' }}
         />
 
         <View style={styles.forgotPasswordContainer}>

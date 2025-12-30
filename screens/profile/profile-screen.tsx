@@ -284,31 +284,42 @@ interface ProfileInputProps {
   multiline?: boolean;
 }
 
-const ProfileInput = ({ label, value, editable, onChangeText, icon, multiline }: ProfileInputProps) => (
-  <View style={styles.inputWrapper}>
-    <Text style={styles.inputLabel}>{label}</Text>
-    <View style={[
-      styles.inputContainer, 
-      editable && styles.inputContainerActive,
-      multiline && styles.inputContainerMultiline
-    ]}>
-      <Ionicons name={icon} size={20} color={editable ? AppColors.primary : AppColors.slate400} style={styles.inputIcon} />
-      <TextInput
-        value={value}
-        onChangeText={onChangeText}
-        editable={editable}
-        placeholder={`Enter ${label.toLowerCase()}`}
-        placeholderTextColor={AppColors.slate500}
-        multiline={multiline}
-        style={[
-          styles.textInputInner, 
-          !editable && styles.textInputDisabled,
-          multiline && { height: 80, textAlignVertical: 'top', paddingTop: 0 }
-        ]}
-      />
+const ProfileInput = ({ label, value, editable, onChangeText, icon, multiline }: ProfileInputProps) => {
+  const [isFocused, setIsFocused] = useState(false);
+
+  return (
+    <View style={styles.inputWrapper}>
+      <Text style={styles.inputLabel}>{label}</Text>
+      <View style={[
+        styles.inputContainer, 
+        (editable && isFocused) && styles.inputContainerActive,
+        multiline && styles.inputContainerMultiline
+      ]}>
+        <Ionicons 
+          name={icon} 
+          size={20} 
+          color={editable ? (isFocused ? AppColors.iconActive : AppColors.iconInactive) : AppColors.slate400} 
+          style={styles.inputIcon} 
+        />
+        <TextInput
+          value={value}
+          onChangeText={onChangeText}
+          editable={editable}
+          placeholder={`Enter ${label.toLowerCase()}`}
+          placeholderTextColor={AppColors.placeholder}
+          multiline={multiline}
+          onFocus={() => setIsFocused(true)}
+          onBlur={() => setIsFocused(false)}
+          style={[
+            styles.textInputInner, 
+            !editable && styles.textInputDisabled,
+            multiline && { height: 80, textAlignVertical: 'top', paddingTop: 0 }
+          ]}
+        />
+      </View>
     </View>
-  </View>
-);
+  );
+};
 
 interface SettingToggleProps {
   label: string;

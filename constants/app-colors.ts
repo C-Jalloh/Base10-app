@@ -16,6 +16,11 @@ export const AppColors = {
   textSecondary: '#94A3B8', // Muted
   textMuted: '#94A3B8',
   textInverted: '#0F172A',
+  placeholder: '#64748B', // Muted Slate for inputs
+
+  // Icon Colors
+  iconActive: '#10B981',
+  iconInactive: '#F8FAFC',
 
   // Status Colors
   success: '#22C55E',
