@@ -2,6 +2,7 @@ import { AppColors, SmartImage, ToggleSwitch } from "@/components/ui";
 import { authApi } from "@/lib/api";
 import { ProfileData } from "@/types/profile";
 import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
+import { useRouter } from "expo-router";
 import React, { useEffect, useState } from "react";
 import {
   ActivityIndicator,
@@ -18,6 +19,7 @@ import {
 const { width } = Dimensions.get("window");
 
 const ProfileScreen = () => {
+  const router = useRouter();
   const [profile, setProfile] = useState<ProfileData | null>(null);
   const [loading, setLoading] = useState(true);
   const [isEditing, setIsEditing] = useState(false);
@@ -76,6 +78,28 @@ const ProfileScreen = () => {
         [field]: value,
       },
     }));
+  };
+
+  const handleLogout = async () => {
+    Alert.alert(
+      "Logout",
+      "Are you sure you want to logout?",
+      [
+        { text: "Cancel", style: "cancel" },
+        { 
+          text: "Logout", 
+          style: "destructive",
+          onPress: async () => {
+            try {
+              await authApi.logout();
+              router.replace("/(auth)/login");
+            } catch (_) {
+              Alert.alert("Error", "Failed to logout");
+            }
+          }
+        }
+      ]
+    );
   };
 
   if (loading) {
@@ -251,6 +275,17 @@ const ProfileScreen = () => {
             onValueChange={(val: boolean) => updateNotificationSetting("exam_countdown", val)}
             icon="timer-outline"
           />
+        </View>
+      </View>
+
+      {/* Account Actions */}
+      <View style={styles.section}>
+        <Text style={styles.sectionTitle}>Account Actions</Text>
+        <View style={styles.card}>
+          <TouchableOpacity style={styles.logoutButton} onPress={handleLogout}>
+            <Ionicons name="log-out-outline" size={20} color="#EF4444" />
+            <Text style={styles.logoutButtonText}>Logout</Text>
+          </TouchableOpacity>
         </View>
       </View>
 
@@ -665,6 +700,18 @@ const styles = StyleSheet.create({
     fontSize: 12,
     fontFamily: "MontserratMedium",
     color: AppColors.textSecondary,
+  },
+  logoutButton: {
+    flexDirection: "row",
+    alignItems: "center",
+    paddingVertical: 12,
+    paddingHorizontal: 4,
+  },
+  logoutButtonText: {
+    fontSize: 14,
+    fontFamily: "MontserratBold",
+    color: "#EF4444",
+    marginLeft: 12,
   },
 });
 

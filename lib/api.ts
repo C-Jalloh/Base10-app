@@ -54,6 +54,12 @@ export const authApi = {
       };
     }
   },
+  logout: async () => {
+    // Simulate network delay
+    await new Promise(resolve => setTimeout(resolve, 500));
+    currentUser = DUMMY_STUDENT; // Reset to default or null
+    return { success: true };
+  },
   register: async (userData: any) => {
     // Simulate network delay
     await new Promise(resolve => setTimeout(resolve, 1500));

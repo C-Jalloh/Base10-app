@@ -1,8 +1,9 @@
 import { TextInputField } from "@/components/ui";
 import { AppColors } from "@/constants/app-colors";
-import { adminApi } from "@/lib/api";
+import { adminApi, authApi } from "@/lib/api";
 import { ProfileData } from "@/types/profile";
 import { Ionicons } from "@expo/vector-icons";
+import { useRouter } from "expo-router";
 import React, { useEffect, useState } from 'react';
 import {
     ActivityIndicator,
@@ -16,6 +17,7 @@ import {
 } from 'react-native';
 
 const AdminProfileScreen = () => {
+  const router = useRouter();
   const [profile, setProfile] = useState<ProfileData | null>(null);
   const [loading, setLoading] = useState(true);
   const [isEditing, setIsEditing] = useState(false);
@@ -35,6 +37,28 @@ const AdminProfileScreen = () => {
     } finally {
       setLoading(false);
     }
+  };
+
+  const handleLogout = async () => {
+    Alert.alert(
+      "Logout",
+      "Are you sure you want to logout?",
+      [
+        { text: "Cancel", style: "cancel" },
+        { 
+          text: "Logout", 
+          style: "destructive",
+          onPress: async () => {
+            try {
+              await authApi.logout();
+              router.replace("/(auth)/login");
+            } catch (error) {
+              Alert.alert("Error", "Failed to logout");
+            }
+          }
+        }
+      ]
+    );
   };
 
   const handleUpdateProfile = async () => {
@@ -334,6 +358,20 @@ const AdminProfileScreen = () => {
                 </View>
                 <Text style={styles.preferenceValue}>{profile?.preferences?.auto_refresh_interval || 30}</Text>
               </View>
+            </View>
+
+            <View style={[styles.sectionHeader, { marginTop: 24 }]}>
+              <View style={[styles.sectionIconContainer, { backgroundColor: '#EF444410' }]}>
+                <Ionicons name="log-out" size={20} color="#EF4444" />
+              </View>
+              <Text style={styles.sectionTitle}>Account Actions</Text>
+            </View>
+
+            <View style={styles.settingsCard}>
+              <TouchableOpacity style={styles.logoutButton} onPress={handleLogout}>
+                <Ionicons name="log-out-outline" size={20} color="#EF4444" />
+                <Text style={styles.logoutButtonText}>Logout from Admin Console</Text>
+              </TouchableOpacity>
             </View>
           </View>
         )}
@@ -755,6 +793,18 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     paddingHorizontal: 40,
     lineHeight: 20,
+  },
+  logoutButton: {
+    flexDirection: "row",
+    alignItems: "center",
+    paddingVertical: 12,
+    paddingHorizontal: 4,
+  },
+  logoutButtonText: {
+    fontSize: 14,
+    fontWeight: "700",
+    color: "#EF4444",
+    marginLeft: 12,
   },
 });
 

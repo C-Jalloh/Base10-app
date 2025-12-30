@@ -1,28 +1,12 @@
-import { AppColors } from "@/components/ui";
-import { authApi } from "@/lib/api";
+import { AppColors } from "@/constants/app-colors";
+import { useAuth } from "@/hooks/useAuth";
 import AdminProfileScreen from "@/screens/admin/admin-profile-screen";
 import ProfileScreen from "@/screens/profile/profile-screen";
-import { ProfileData } from "@/types/profile";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { ActivityIndicator, SafeAreaView } from "react-native";
 
 const Screen = () => {
-  const [user, setUser] = useState<ProfileData | null>(null);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const fetchUser = async () => {
-      try {
-        const response = await authApi.getProfile();
-        setUser(response.data);
-      } catch (error) {
-        console.error("Failed to fetch user profile:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchUser();
-  }, []);
+  const { isAdmin, loading } = useAuth();
 
   if (loading) {
     return (
@@ -39,7 +23,7 @@ const Screen = () => {
         backgroundColor: AppColors.background,
       }}
     >
-      {user?.role === 'ADMIN' ? <AdminProfileScreen /> : <ProfileScreen />}
+      {isAdmin ? <AdminProfileScreen /> : <ProfileScreen />}
     </SafeAreaView>
   );
 };

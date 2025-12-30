@@ -1,6 +1,6 @@
 import { AppColors } from "@/constants/app-colors";
 import { useAuth } from "@/hooks/useAuth";
-import PracticeScreen from "@/screens/practice/practice-screen";
+import AdminQuestionsScreen from "@/screens/admin/admin-questions-screen";
 import { Redirect } from "expo-router";
 import React from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -10,8 +10,8 @@ const Screen = () => {
 
   if (loading) return null;
 
-  if (isAdmin) {
-    return <Redirect href="/(root)/(tabs)/home" />;
+  if (!isAdmin) {
+    return <Redirect href="/home" />;
   }
 
   return (
@@ -21,7 +21,7 @@ const Screen = () => {
         backgroundColor: AppColors.background,
       }}
     >
-      <PracticeScreen />
+      <AdminQuestionsScreen />
     </SafeAreaView>
   );
 };
