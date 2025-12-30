@@ -34,7 +34,8 @@ const ProfileScreen = () => {
       const response = await authApi.getProfile();
       setProfile(response.data);
       setEditedProfile(response.data);
-    } catch (_error) {
+    } catch (error) {
+      console.error("Failed to load profile:", error);
       Alert.alert("Error", "Failed to load profile data");
     } finally {
       setLoading(false);
@@ -48,7 +49,8 @@ const ProfileScreen = () => {
       setProfile(response.data);
       setIsEditing(false);
       Alert.alert("Success", "Profile updated successfully");
-    } catch (_error) {
+    } catch (error) {
+      console.error("Failed to update profile:", error);
       Alert.alert("Error", "Failed to update profile");
     } finally {
       setSaving(false);
@@ -93,6 +95,7 @@ const ProfileScreen = () => {
   if (!profile) return null;
 
   const daysUntilExam = () => {
+    if (!profile.target_exam_date) return 0;
     const target = new Date(profile.target_exam_date);
     const now = new Date();
     const diff = target.getTime() - now.getTime();
@@ -127,7 +130,7 @@ const ProfileScreen = () => {
             </View>
             <Text style={styles.email}>{profile.email}</Text>
             <View style={styles.levelBadge}>
-              <Text style={styles.levelText}>Level {profile.level}</Text>
+              <Text style={styles.levelText}>Level {profile.level ?? 1}</Text>
             </View>
           </View>
 
@@ -150,10 +153,10 @@ const ProfileScreen = () => {
 
       {/* Stats Grid */}
       <View style={styles.statsGrid}>
-        <StatItem icon="star" color="#F59E0B" label="Points" value={profile.total_points.toString()} />
-        <StatItem icon="flame" color="#EF4444" label="Streak" value={`${profile.study_streak}d`} />
-        <StatItem icon="pie-chart" color={AppColors.primary} label="Progress" value={`${profile.profile_completion_percentage}%`} />
-        <StatItem icon="trophy" color="#8B5CF6" label="Badges" value={profile.achievement_badges.length.toString()} />
+        <StatItem icon="star" color="#F59E0B" label="Points" value={(profile.total_points ?? 0).toString()} />
+        <StatItem icon="flame" color="#EF4444" label="Streak" value={`${profile.study_streak ?? 0}d`} />
+        <StatItem icon="pie-chart" color={AppColors.primary} label="Progress" value={`${profile.profile_completion_percentage ?? 0}%`} />
+        <StatItem icon="trophy" color="#8B5CF6" label="Badges" value={(profile.achievement_badges?.length ?? 0).toString()} />
       </View>
 
       {/* Main Content */}
@@ -238,13 +241,13 @@ const ProfileScreen = () => {
           />
           <SettingToggle
             label="Push Notifications"
-            value={editedProfile.notification_settings?.push_enabled ?? profile.notification_settings.push_enabled}
+            value={editedProfile.notification_settings?.push_enabled ?? profile.notification_settings.push_enabled ?? false}
             onValueChange={(val: boolean) => updateNotificationSetting("push_enabled", val)}
             icon="notifications-outline"
           />
           <SettingToggle
             label="Exam Countdown Alerts"
-            value={editedProfile.notification_settings?.exam_countdown ?? profile.notification_settings.exam_countdown}
+            value={editedProfile.notification_settings?.exam_countdown ?? profile.notification_settings.exam_countdown ?? false}
             onValueChange={(val: boolean) => updateNotificationSetting("exam_countdown", val)}
             icon="timer-outline"
           />

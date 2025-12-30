@@ -5,12 +5,12 @@ import { deviceBehavior } from '@/utils/helpers';
 import type { FC } from 'react';
 import React, { useState } from 'react';
 import {
-    Keyboard,
-    KeyboardAvoidingView,
-    Text,
-    TextInput,
-    TouchableWithoutFeedback,
-    View,
+  Keyboard,
+  KeyboardAvoidingView,
+  Text,
+  TextInput,
+  TouchableWithoutFeedback,
+  View,
 } from 'react-native';
 
 const TextInputField2: FC<InputFieldProps> = ({
@@ -27,6 +27,7 @@ const TextInputField2: FC<InputFieldProps> = ({
   placeholder,
   className,
   Icon,
+  iconProps,
   width = 30,
   height = 24,
   error,
@@ -76,6 +77,8 @@ const TextInputField2: FC<InputFieldProps> = ({
               <View style={[textInputStyles.iconContainer]}>
                 <Icon
                   size={24}
+                  name={iconProps?.name as any}
+                  {...iconProps}
                   color={isFocused ? AppColors.iconActive : AppColors.iconInactive}
                 />
               </View>

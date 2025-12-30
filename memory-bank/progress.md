@@ -1,24 +1,19 @@
-# Progress (Updated: 2025-12-29)
+# Progress (Updated: 2025-12-30)
 
 ## Done
 
-- Initialize project
-- Implement OLED-optimized "Deep Emerald" color palette
-- Update UI components (ActionButton, TextInputField, FieldError) with new theme
-- Replicate web design for Login, Register, and Forgot Password screens
-- Create mock API layer in lib/api.ts
-- Migrate SVG assets from web project
-- Implement SmartImage and Logo components for brand consistency
-- Create start-app.sh for reliable mobile connectivity
+- Student Profile implementation
+- Auth UI Refinement (scrollability, focus states)
+- Admin Mock API and Data setup
+- TypeScript Error Cleanup
+- Role-based Profile Routing
+- Admin Profile UI alignment with web reference (Header, Cards, Settings)
 
 ## Doing
 
-- Finalizing mock API integration for Auth screens
-- Testing asset management with SmartImage and Logo components
+- Finalizing Admin Profile UI alignment with web reference
 
 ## Next
 
-- Implement actual authentication with backend API
-- Develop the Home/Dashboard screen UI
-- Implement AI chat interface features
-- Set up state management (e.g., Zustand or Context API) for user session
+- Implement real activity logs for Admin
+- Add more administrative tools (User management, Question bank)

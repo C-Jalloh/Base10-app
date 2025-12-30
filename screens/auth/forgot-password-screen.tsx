@@ -37,7 +37,8 @@ const ForgotPasswordScreen = () => {
         'If an account with that email exists, a reset link has been sent.',
         [{ text: 'OK', onPress: () => router.replace('/login') }]
       );
-    } catch (err: any) {
+    } catch (error) {
+      console.error("Failed to send reset link:", error);
       Alert.alert('Error', 'Failed to send reset link. Please try again.');
     } finally {
       setLoading(false);

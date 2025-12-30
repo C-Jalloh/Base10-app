@@ -1,0 +1,77 @@
+import { ProfileData } from "@/types/profile";
+
+export const DUMMY_STUDENT: ProfileData = {
+  id: 1,
+  full_name: "C Jalloh",
+  email: "cjalloh25@gmail.com",
+  phone_number: "7834351",
+  role: 'STUDENT',
+  avatar_url: "https://api.dicebear.com/7.x/avataaars/svg?seed=C%20Jalloh",
+  bio: "Passionate student aiming for excellence in WASSCE. I love learning new things and exploring AI.",
+  is_verified: true,
+  education_level: "SSS3",
+  learning_style: "Visual",
+  preferred_subjects: ["Mathematics", "Physics", "Computer Science"],
+  study_time_preference: "Evening",
+  target_exam_date: "2026-05-15T00:00:00.000Z",
+  level: 5,
+  total_points: 1250,
+  study_streak: 12,
+  profile_completion_percentage: 85,
+  achievement_badges: ["Early Bird", "Math Whiz", "Streak Master"],
+  notification_settings: {
+    email_enabled: true,
+    sms_enabled: false,
+    push_enabled: true,
+    daily_reminder: true,
+    weekly_progress: true,
+    exam_countdown: true,
+    achievement_alerts: true,
+  },
+  privacy_settings: {
+    show_profile: true,
+    show_progress: true,
+    show_in_leaderboard: true,
+    allow_classmate_comparison: true,
+  },
+  country: "The Gambia",
+  location: "Banjul",
+  created_at: new Date().toISOString(),
+};
+
+export const DUMMY_ADMIN: ProfileData = {
+  id: 2,
+  full_name: "E S Jallow",
+  email: "esjallow03@gmail.com",
+  phone_number: "3947425",
+  username: "admin_user",
+  role: 'ADMIN',
+  avatar_url: "https://api.dicebear.com/7.x/avataaars/svg?seed=Admin",
+  bio: "System administrator for Base10",
+  is_active: true,
+  is_verified: true,
+  created_at: "2024-01-15T10:30:00Z",
+  last_login: new Date().toISOString(),
+  notification_settings: {
+    email_enabled: true,
+    system_alerts: true,
+    user_reports: true,
+    new_registrations: false,
+    performance_alerts: true,
+    security_alerts: true
+  },
+  preferences: {
+    theme: "dark",
+    default_view: "dashboard",
+    items_per_page: 25,
+    auto_refresh_interval: 60,
+    show_advanced_metrics: true,
+    timezone: "Africa/Freetown"
+  },
+  total_actions_performed: 150,
+  last_action_at: new Date().toISOString(),
+  country: "Sierra Leone",
+  location: "Freetown",
+};
+
+export const MOCK_USERS = [DUMMY_STUDENT, DUMMY_ADMIN];

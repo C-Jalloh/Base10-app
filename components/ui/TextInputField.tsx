@@ -6,13 +6,13 @@ import { Ionicons } from '@expo/vector-icons';
 import type { FC } from 'react';
 import React, { useState } from 'react';
 import {
-    Keyboard,
-    KeyboardAvoidingView,
-    Pressable,
-    Text,
-    TextInput,
-    TouchableWithoutFeedback,
-    View,
+  Keyboard,
+  KeyboardAvoidingView,
+  Pressable,
+  Text,
+  TextInput,
+  TouchableWithoutFeedback,
+  View,
 } from 'react-native';
 import { FieldError } from './FieldError';
 
@@ -79,6 +79,7 @@ const TextInputField: FC<InputFieldProps> = ({
               <View style={[textInputStyles.iconContainer]}>
                 <Icon 
                   size={24} 
+                  name={iconProps?.name as any} 
                   {...iconProps} 
                   color={isFocused ? AppColors.iconActive : AppColors.iconInactive}
                 />
