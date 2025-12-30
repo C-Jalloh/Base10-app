@@ -4,7 +4,7 @@ import React from "react";
 import { HapticTab } from "@/components/haptic-tab";
 import { AppColors } from "@/constants/app-colors";
 import { useAuth } from "@/hooks/useAuth";
-import { FontAwesome5, Ionicons } from "@expo/vector-icons";
+import { Ionicons } from "@expo/vector-icons";
 
 export default function TabLayout() {
   const { isAdmin, loading } = useAuth();
@@ -33,9 +33,9 @@ export default function TabLayout() {
       <Tabs.Screen
         name="home"
         options={{
-          title: isAdmin ? "Admin Home" : "Home",
+          title: isAdmin ? "Admin Home" : "Dashboard",
           tabBarIcon: ({ color }) => (
-            <Ionicons name={isAdmin ? "shield-checkmark" : "home"} size={24} color={color} />
+            <Ionicons name={isAdmin ? "shield-checkmark" : "grid"} size={24} color={color} />
           ),
         }}
       />
@@ -47,7 +47,7 @@ export default function TabLayout() {
           title: "Classrooms",
           href: isAdmin ? null : undefined,
           tabBarIcon: ({ color }) => (
-            <Ionicons name="book" size={24} color={color} />
+            <Ionicons name="book-outline" size={24} color={color} />
           ),
         }}
       />
@@ -57,7 +57,7 @@ export default function TabLayout() {
           title: "AI Tutor",
           href: isAdmin ? null : undefined,
           tabBarIcon: ({ color }) => (
-            <FontAwesome5 name="robot" size={24} color={color} />
+            <Ionicons name="chatbubble-ellipses-outline" size={24} color={color} />
           ),
         }}
       />
@@ -67,7 +67,7 @@ export default function TabLayout() {
           title: "Practice",
           href: isAdmin ? null : undefined,
           tabBarIcon: ({ color }) => (
-            <Ionicons name="bookmarks" size={24} color={color} />
+            <Ionicons name="flask-outline" size={24} color={color} />
           ),
         }}
       />
