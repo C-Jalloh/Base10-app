@@ -20,5 +20,10 @@ export const useAuth = () => {
     fetchUser();
   }, []);
 
-  return { user, loading, isAdmin: user?.role === 'ADMIN' };
+  return { 
+    user, 
+    loading, 
+    isAdmin: user?.role === 'ADMIN',
+    isTeacher: user?.role === 'TEACHER'
+  };
 };

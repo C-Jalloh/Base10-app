@@ -2,11 +2,12 @@ import { AppColors } from "@/constants/app-colors";
 import { useAuth } from "@/hooks/useAuth";
 import AdminHomeScreen from "@/screens/admin/admin-home-screen";
 import HomeScreen from "@/screens/home/home-screen";
+import TeacherHomeScreen from "@/screens/teacher/teacher-home-screen";
 import React from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 const Screen = () => {
-  const { isAdmin, loading } = useAuth();
+  const { isAdmin, isTeacher, loading } = useAuth();
 
   if (loading) return null;
 
@@ -17,7 +18,13 @@ const Screen = () => {
         backgroundColor: AppColors.background,
       }}
     >
-      {isAdmin ? <AdminHomeScreen /> : <HomeScreen />}
+      {isAdmin ? (
+        <AdminHomeScreen />
+      ) : isTeacher ? (
+        <TeacherHomeScreen />
+      ) : (
+        <HomeScreen />
+      )}
     </SafeAreaView>
   );
 };

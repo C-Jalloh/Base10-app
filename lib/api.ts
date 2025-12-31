@@ -1,8 +1,8 @@
-import { DUMMY_ADMIN, DUMMY_STUDENT, MOCK_USERS } from "@/mocks/users";
+import { DUMMY_ADMIN, DUMMY_STUDENT, DUMMY_TEACHER, MOCK_USERS } from "@/mocks/users";
 import { ProfileData } from "@/types/profile";
 
 // Simple mock session state
-let currentUser: ProfileData = DUMMY_STUDENT;
+let currentUser: ProfileData = DUMMY_TEACHER;
 
 export const DUMMY_USER = currentUser;
 
@@ -32,7 +32,9 @@ export const authApi = {
       "cjalloh25@gmail.com": "CJ@lloh25",
       "7834351": "CJ@lloh25",
       "esjallow03@gmail.com": "Admin@123",
-      "3947425": "Admin@123"
+      "3947425": "Admin@123",
+      "sarah.kamara@base10.edu": "Teacher@123",
+      "7777777": "Teacher@123"
     };
 
     if (user && mockPasswords[username] === password) {

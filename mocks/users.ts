@@ -74,4 +74,35 @@ export const DUMMY_ADMIN: ProfileData = {
   location: "Freetown",
 };
 
-export const MOCK_USERS = [DUMMY_STUDENT, DUMMY_ADMIN];
+export const DUMMY_TEACHER: ProfileData = {
+  id: 3,
+  full_name: "Dr. Sarah Kamara",
+  email: "sarah.kamara@base10.edu",
+  phone_number: "7777777",
+  role: 'TEACHER',
+  avatar_url: "https://api.dicebear.com/7.x/avataaars/svg?seed=Sarah",
+  bio: "Senior Mathematics Teacher with 10 years of experience in WASSCE preparation.",
+  is_verified: true,
+  education_level: "PhD in Education",
+  preferred_subjects: ["Mathematics", "Further Mathematics"],
+  notification_settings: {
+    email_enabled: true,
+    sms_enabled: true,
+    push_enabled: true,
+    daily_reminder: true,
+    weekly_progress: true,
+    exam_countdown: false,
+    achievement_alerts: true,
+  },
+  privacy_settings: {
+    show_profile: true,
+    show_progress: true,
+    show_in_leaderboard: false,
+    allow_classmate_comparison: false,
+  },
+  country: "Sierra Leone",
+  location: "Freetown",
+  created_at: new Date().toISOString(),
+};
+
+export const MOCK_USERS = [DUMMY_STUDENT, DUMMY_ADMIN, DUMMY_TEACHER];

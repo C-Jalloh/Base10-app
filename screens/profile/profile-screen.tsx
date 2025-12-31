@@ -93,7 +93,7 @@ const ProfileScreen = () => {
             try {
               await authApi.logout();
               router.replace("/(auth)/login");
-            } catch (_) {
+            } catch {
               Alert.alert("Error", "Failed to logout");
             }
           }

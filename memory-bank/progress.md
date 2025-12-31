@@ -1,19 +1,23 @@
-# Progress (Updated: 2025-12-30)
+# Progress (Updated: 2025-12-31)
 
 ## Done
 
-- Student Profile implementation
-- Auth UI Refinement (scrollability, focus states)
-- Admin Mock API and Data setup
-- TypeScript Error Cleanup
-- Role-based Profile Routing
-- Admin Profile UI alignment with web reference (Header, Cards, Settings)
+- Admin Tabs & Screens
+- Student Dashboard Redesign
+- Logout Functionality
+- Teacher Branch & Hook Update
+- Teacher Home Screen UI
+- Teacher Classrooms Screen UI
+- Teacher Assignments Screen UI
+- Teacher Analytics Screen UI
+- Teacher Tab Routes & Navigation Logic
+- Teacher AI Assistant Screen & Tab
 
 ## Doing
 
-- Finalizing Admin Profile UI alignment with web reference
+- Implementing Teacher role features
 
 ## Next
 
-- Implement real activity logs for Admin
-- Add more administrative tools (User management, Question bank)
+- Refining Teacher features (e.g., adding actual data fetching)
+- Implementing AI features for teachers
