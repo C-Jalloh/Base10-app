@@ -63,7 +63,7 @@ const ActionButton = ({
         }),
       ]).start();
     }
-  }, [isEnabled]);
+  }, [isEnabled, animatedButtonOpacity, animatedButtonScale]);
 
   return (
     <Animated.View

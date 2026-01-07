@@ -17,7 +17,7 @@ const ToggleSwitch: React.FC<ToggleSwitchProps> = ({ value, onValueChange, disab
       duration: 200,
       useNativeDriver: false,
     }).start();
-  }, [value]);
+  }, [value, animatedValue]);
 
   const translateX = animatedValue.interpolate({
     inputRange: [0, 1],

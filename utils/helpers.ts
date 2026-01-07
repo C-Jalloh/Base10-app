@@ -10,8 +10,8 @@ export const isIPad = () => {
   return Platform.OS === 'ios' && Platform.isPad;
 };
 
-export const deviceBehavior = () => {
-  return Platform.OS === 'ios' ? 'padding' : undefined;
+export const deviceBehavior = (): 'padding' | 'height' => {
+  return Platform.OS === 'ios' ? 'padding' : 'height';
 };
 
 export const getiPhoneModel = () => {
