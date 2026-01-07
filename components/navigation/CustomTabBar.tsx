@@ -2,17 +2,17 @@ import { AppColors } from "@/constants/app-colors";
 import { BottomTabBarProps } from "@react-navigation/bottom-tabs";
 import React, { useEffect } from "react";
 import {
-    StyleSheet,
-    Text,
-    TouchableOpacity,
-    View
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View
 } from "react-native";
 import Animated, {
-    interpolate,
-    interpolateColor,
-    useAnimatedStyle,
-    useSharedValue,
-    withSpring
+  interpolate,
+  interpolateColor,
+  useAnimatedStyle,
+  useSharedValue,
+  withSpring
 } from "react-native-reanimated";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
@@ -110,7 +110,7 @@ const TabItem = ({
 };
 
 interface CustomTabBarProps extends BottomTabBarProps {
-  role?: 'STUDENT' | 'TEACHER' | 'ADMIN';
+  role?: 'STUDENT' | 'TEACHER' | 'ADMIN' | 'MODERATOR';
 }
 
 export const CustomTabBar = ({ state, descriptors, navigation, role }: CustomTabBarProps) => {
@@ -120,6 +120,7 @@ export const CustomTabBar = ({ state, descriptors, navigation, role }: CustomTab
   const TEACHER_TABS = ['home', 'teacher-classrooms', 'teacher-ai', 'teacher-assignments', 'profile'];
   const STUDENT_TABS = ['home', 'class-room', 'ai', 'practice', 'profile'];
   const ADMIN_TABS = ['home', 'users', 'questions', 'activity', 'profile'];
+  const MODERATOR_TABS = ['home', 'moderator-reports', 'moderator-bank', 'moderator-cards', 'profile'];
 
   // Filter out routes based on the role
   const visibleRoutes = state.routes.filter((route) => {
@@ -132,6 +133,7 @@ export const CustomTabBar = ({ state, descriptors, navigation, role }: CustomTab
     if (role === 'TEACHER') return TEACHER_TABS.includes(route.name);
     if (role === 'STUDENT') return STUDENT_TABS.includes(route.name);
     if (role === 'ADMIN') return ADMIN_TABS.includes(route.name);
+    if (role === 'MODERATOR') return MODERATOR_TABS.includes(route.name);
     
     return true;
   });

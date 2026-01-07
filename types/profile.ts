@@ -5,7 +5,7 @@ export interface ProfileData {
   email: string;
   phone_number: string;
   username?: string;
-  role: 'STUDENT' | 'ADMIN' | 'TEACHER';
+  role: 'STUDENT' | 'ADMIN' | 'TEACHER' | 'MODERATOR';
   avatar_url?: string;
   bio?: string;
   is_verified: boolean;

@@ -8,15 +8,20 @@ import { useAuth } from "@/hooks/useAuth";
 import { Ionicons } from "@expo/vector-icons";
 
 export default function TabLayout() {
-  const { isAdmin, isTeacher, loading } = useAuth();
+  const { isAdmin, isTeacher, isModerator, loading } = useAuth();
 
   if (loading) return null;
 
-  const isStudent = !isAdmin && !isTeacher;
+  const isStudent = !isAdmin && !isTeacher && !isModerator;
 
   return (
     <Tabs
-      tabBar={isTeacher ? (props) => <CustomTabBar {...props} role="TEACHER" /> : undefined}
+      tabBar={(props) => {
+        if (isTeacher) return <CustomTabBar {...props} role="TEACHER" />;
+        if (isModerator) return <CustomTabBar {...props} role="MODERATOR" />;
+        if (isAdmin) return <CustomTabBar {...props} role="ADMIN" />;
+        return <CustomTabBar {...props} role="STUDENT" />;
+      }}
       screenOptions={{
         tabBarStyle: {
           backgroundColor: AppColors.background,
@@ -37,9 +42,9 @@ export default function TabLayout() {
       <Tabs.Screen
         name="home"
         options={{
-          title: isAdmin ? "Admin Home" : (isTeacher ? "Teacher Home" : "Dashboard"),
+          title: isAdmin ? "Admin Home" : (isTeacher ? "Teacher Home" : (isModerator ? "Mod Home" : "Dashboard")),
           tabBarIcon: ({ color }) => (
-            <Ionicons name={isAdmin ? "shield-checkmark" : (isTeacher ? "school" : "grid")} size={24} color={color} />
+            <Ionicons name={isAdmin ? "shield-checkmark" : (isTeacher ? "school" : (isModerator ? "shield-half" : "grid"))} size={24} color={color} />
           ),
         }}
       />
@@ -108,6 +113,48 @@ export default function TabLayout() {
         }}
       />
 
+      {/* Moderator Only Tabs */}
+      <Tabs.Screen
+        name="moderator-home"
+        options={{
+          title: "Home",
+          href: isModerator ? "/(root)/(tabs)/moderator-home" : null,
+          tabBarIcon: ({ color }) => (
+            <Ionicons name="home-outline" size={24} color={color} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="moderator-reports"
+        options={{
+          title: "Reports",
+          href: isModerator ? "/(root)/(tabs)/moderator-reports" : null,
+          tabBarIcon: ({ color }) => (
+            <Ionicons name="flag-outline" size={24} color={color} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="moderator-bank"
+        options={{
+          title: "Bank",
+          href: isModerator ? "/(root)/(tabs)/moderator-bank" : null,
+          tabBarIcon: ({ color }) => (
+            <Ionicons name="library-outline" size={24} color={color} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="moderator-cards"
+        options={{
+          title: "Cards",
+          href: isModerator ? "/(root)/(tabs)/moderator-cards" : null,
+          tabBarIcon: ({ color }) => (
+            <Ionicons name="copy-outline" size={24} color={color} />
+          ),
+        }}
+      />
+
       {/* Admin Only Tabs */}
       <Tabs.Screen
         name="users"
@@ -145,7 +192,7 @@ export default function TabLayout() {
         options={{
           title: "Profile",
           tabBarIcon: ({ color }) => (
-            <Ionicons name={isAdmin ? "person-circle" : (isTeacher ? "person-circle-outline" : "person")} size={24} color={color} />
+            <Ionicons name={isAdmin ? "person-circle" : (isTeacher ? "person-circle-outline" : (isModerator ? "person-outline" : "person"))} size={24} color={color} />
           ),
         }}
       />

@@ -24,6 +24,7 @@ export const useAuth = () => {
     user, 
     loading, 
     isAdmin: user?.role === 'ADMIN',
-    isTeacher: user?.role === 'TEACHER'
+    isTeacher: user?.role === 'TEACHER',
+    isModerator: user?.role === 'MODERATOR'
   };
 };

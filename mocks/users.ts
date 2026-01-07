@@ -70,8 +70,8 @@ export const DUMMY_ADMIN: ProfileData = {
   },
   total_actions_performed: 150,
   last_action_at: new Date().toISOString(),
-  country: "Sierra Leone",
-  location: "Freetown",
+  country: "The Gambia",
+  location: "Banjul",
 };
 
 export const DUMMY_TEACHER: ProfileData = {
@@ -100,9 +100,38 @@ export const DUMMY_TEACHER: ProfileData = {
     show_in_leaderboard: false,
     allow_classmate_comparison: false,
   },
-  country: "Sierra Leone",
-  location: "Freetown",
+  country: "The Gambia",
+  location: "Banjul",
   created_at: new Date().toISOString(),
 };
 
-export const MOCK_USERS = [DUMMY_STUDENT, DUMMY_ADMIN, DUMMY_TEACHER];
+export const DUMMY_MODERATOR: ProfileData = {
+  id: 4,
+  full_name: "Mod. John Doe",
+  email: "john.mod@base10.edu",
+  phone_number: "8888888",
+  role: 'MODERATOR',
+  avatar_url: "https://api.dicebear.com/7.x/avataaars/svg?seed=JohnMod",
+  bio: "Content Moderator and Quality Assurance specialist.",
+  is_verified: true,
+  notification_settings: {
+    email_enabled: true,
+    sms_enabled: false,
+    push_enabled: true,
+    daily_reminder: false,
+    weekly_progress: false,
+    exam_countdown: false,
+    achievement_alerts: false,
+  },
+  privacy_settings: {
+    show_profile: true,
+    show_progress: false,
+    show_in_leaderboard: false,
+    allow_classmate_comparison: false,
+  },
+  country: "The Gambia",
+  location: "Banjul",
+  created_at: new Date().toISOString(),
+};
+
+export const MOCK_USERS = [DUMMY_STUDENT, DUMMY_ADMIN, DUMMY_TEACHER, DUMMY_MODERATOR];
