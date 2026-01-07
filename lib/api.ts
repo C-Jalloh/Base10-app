@@ -137,6 +137,114 @@ export const studentApi = {
         { subject_name: 'Biology', total_attempts: 6, accuracy: 75, mastery_level: 'Proficient', top_topics: ['Genetics', 'Ecology'] }
       ]
     };
+  },
+  getClassroomStats: async () => {
+    await new Promise(resolve => setTimeout(resolve, 500));
+    return {
+      data: {
+        active_classrooms: 4,
+        total_assignments: 24,
+        completed_assignments: 18,
+        completion_percentage: 75.0
+      }
+    };
+  }
+};
+
+export const classroomApi = {
+  getClassrooms: async () => {
+    await new Promise(resolve => setTimeout(resolve, 800));
+    return {
+      data: [
+        {
+          id: '1',
+          name: 'Mathematics Grade 12',
+          subject: 'Mathematics',
+          teacher_name: 'Mr. ADEBAYO',
+          student_count: 45,
+          grade_level: 'SS3',
+          role: 'student',
+          last_activity: '2023-10-25T10:00:00Z',
+          progress: 85,
+          class_code: 'MATH12-ABC',
+          total_posts: 124
+        },
+        {
+          id: '2',
+          name: 'Physics Grade 12',
+          subject: 'Physics',
+          teacher_name: 'Mrs. JALLOH',
+          student_count: 38,
+          grade_level: 'SS3',
+          role: 'student',
+          last_activity: '2023-10-24T14:30:00Z',
+          progress: 40,
+          class_code: 'PHYS12-XYZ',
+          total_posts: 89
+        },
+        {
+          id: '3',
+          name: 'Biology',
+          subject: 'Biology',
+          teacher_name: 'Ms. Elena Jallow',
+          student_count: 52,
+          grade_level: 'SS2',
+          role: 'student',
+          last_activity: '2023-10-23T09:15:00Z',
+          progress: 100,
+          class_code: 'BIO-202',
+          total_posts: 45
+        }
+      ]
+    };
+  },
+  getClassroom: async (id: string) => {
+    await new Promise(resolve => setTimeout(resolve, 600));
+    const classrooms = [
+      {
+        id: '1',
+        name: 'Mathematics Grade 12',
+        subject: 'Mathematics',
+        teacher_name: 'Mr. ADEBAYO',
+        student_count: 45,
+        grade_level: 'SS3',
+        description: 'Deep dive into calculus and analytical geometry for WASSCE excellence.',
+        class_code: 'MATH12-ABC',
+        total_posts: 124
+      },
+      // ... 
+    ];
+    return { data: classrooms.find(c => c.id === id) || classrooms[0] };
+  },
+  getStream: async (classroomId: string) => {
+    await new Promise(resolve => setTimeout(resolve, 800));
+    return {
+      data: [
+        {
+          id: '101',
+          author_name: 'Mr. ADEBAYO',
+          author_role: 'teacher',
+          content: 'Please review the notes on Calculus before tomorrow\'s quiz.',
+          type: 'announcement',
+          created_at: '2023-10-25T08:00:00Z',
+          attachments: [{ name: 'calculus_notes.pdf', type: 'pdf' }],
+          comments_count: 5
+        },
+        {
+          id: '102',
+          author_name: 'Sarah J.',
+          author_role: 'student',
+          content: 'How do we derive the first principle for sin(x)?',
+          type: 'question',
+          created_at: '2023-10-25T09:30:00Z',
+          comments_count: 3
+        }
+      ]
+    };
+  },
+  joinClassroom: async (code: string) => {
+    await new Promise(resolve => setTimeout(resolve, 1500));
+    return { data: { message: "Successfully joined the classroom", classroom_id: "4" } };
   }
 };
 
