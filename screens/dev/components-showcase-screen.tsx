@@ -6,7 +6,9 @@ import {
     AppColors,
     AppInput,
     AppText,
-    IconButton
+    IconButton,
+    MasteryBar,
+    PerformanceRadar
 } from "@/components/ui";
 import { BottomSheetModal } from "@gorhom/bottom-sheet";
 import React from "react";
@@ -182,6 +184,33 @@ const ComponentsShowcase = () => {
             variant="primary" 
             icon="chevron-up" 
           />
+        </Section>
+
+        <Section title="Performance & Mastery Analytics (Skia)">
+          <AppCard variant="flat">
+            <AppCard.Header title="Topic Mastery" subtitle="Real-time 60FPS Skia Progress" />
+            <AppCard.Content>
+              <MasteryBar label="Mathematics" progress={0.85} />
+              <MasteryBar label="English Language" progress={0.62} />
+              <MasteryBar label="Physics" progress={0.45} />
+            </AppCard.Content>
+          </AppCard>
+
+          <AppCard variant="outline" style={{ marginTop: 16 }}>
+            <AppCard.Header title="Performance Radar" subtitle="Student Strengths Overview" />
+            <AppCard.Content style={{ alignItems: 'center' }}>
+              <PerformanceRadar 
+                data={[
+                  { label: 'Calculus', value: 0.8 },
+                  { label: 'Algebra', value: 0.9 },
+                  { label: 'Geometry', value: 0.6 },
+                  { label: 'Statistics', value: 0.75 },
+                  { label: 'Logic', value: 0.85 },
+                ]} 
+                size={240}
+              />
+            </AppCard.Content>
+          </AppCard>
         </Section>
 
         <View style={{ height: 40 }} />

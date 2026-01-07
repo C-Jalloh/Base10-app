@@ -12,9 +12,11 @@ import { SmartImage } from '@/components/ui/SmartImage';
 import TextInputField from '@/components/ui/TextInputField';
 import ToggleSwitch from '@/components/ui/ToggleSwitch';
 import { AppColors } from '@/constants/app-colors';
+import MasteryBar from '@/components/ui/MasteryBar';
+import PerformanceRadar from '@/components/ui/PerformanceRadar';
 
 export {
     ActionButton, AppBadge, AppBottomSheet, AppButton, AppCard, AppColors, AppInput, AppText, FieldError, IconButton, Logo,
-    SmartImage, TextInputField, ToggleSwitch
+    SmartImage, TextInputField, ToggleSwitch, MasteryBar, PerformanceRadar
 };
 
