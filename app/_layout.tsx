@@ -1,5 +1,6 @@
 import { Stack } from "expo-router";
 
+import { BottomSheetModalProvider } from "@gorhom/bottom-sheet";
 import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
 import { StatusBar } from "expo-status-bar";
@@ -45,24 +46,26 @@ export default function RootLayout() {
   return (
     <SafeAreaProvider>
       <GestureHandlerRootView style={{ flex: 1 }}>
-        <Stack
-          screenOptions={{
-            headerBackButtonMenuEnabled: false,
-            headerShadowVisible: false,
-            headerBackVisible: false,
-            headerShown: false,
-            headerStyle: {
-              backgroundColor: "#121212",
-            },
-          }}
-          initialRouteName="index"
-        >
-          <Stack.Screen name="index" />
-          <Stack.Screen name="(auth)" />
-          <Stack.Screen name="(root)" />
+        <BottomSheetModalProvider>
+          <Stack
+            screenOptions={{
+              headerBackButtonMenuEnabled: false,
+              headerShadowVisible: false,
+              headerBackVisible: false,
+              headerShown: false,
+              headerStyle: {
+                backgroundColor: "#121212",
+              },
+            }}
+            initialRouteName="index"
+          >
+            <Stack.Screen name="index" />
+            <Stack.Screen name="(auth)" />
+            <Stack.Screen name="(root)" />
 
-          <Stack.Screen name="+not-found" />
-        </Stack>
+            <Stack.Screen name="+not-found" />
+          </Stack>
+        </BottomSheetModalProvider>
         <StatusBar style="auto" />
       </GestureHandlerRootView>
     </SafeAreaProvider>

@@ -3,14 +3,14 @@ import { Ionicons } from "@expo/vector-icons";
 import * as Haptics from "expo-haptics";
 import React from "react";
 import {
-  ActivityIndicator,
-  StyleSheet,
-  Text,
-  Pressable,
-  View,
-  ViewStyle,
-  TextStyle,
-  Platform,
+    ActivityIndicator,
+    Platform,
+    Pressable,
+    StyleSheet,
+    Text,
+    TextStyle,
+    View,
+    ViewStyle,
 } from "react-native";
 
 export type ButtonVariant = 

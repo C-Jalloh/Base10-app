@@ -3,10 +3,10 @@ import { Ionicons } from "@expo/vector-icons";
 import * as Haptics from "expo-haptics";
 import React from "react";
 import {
-  StyleSheet,
-  Pressable,
-  ViewStyle,
   Platform,
+  Pressable,
+  StyleSheet,
+  ViewStyle,
 } from "react-native";
 
 interface IconButtonProps {

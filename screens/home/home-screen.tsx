@@ -1,8 +1,8 @@
+import { IconButton } from "@/components/ui";
 import { AppColors } from "@/constants/app-colors";
 import { aiApi, authApi, studentApi } from "@/lib/api";
 import { DashboardData, RadarDataPoint, SubjectStat } from "@/types/dashboard";
 import { ProfileData } from "@/types/profile";
-import { AppButton, AppCard, AppText, AppBadge, IconButton } from "@/components/ui";
 import { Ionicons, MaterialCommunityIcons, MaterialIcons } from "@expo/vector-icons";
 import { router } from "expo-router";
 import React, { useEffect, useState } from "react";
@@ -296,7 +296,7 @@ const HomeScreen = () => {
       {!dashboardData?.has_target_exam && (
         <TouchableOpacity style={styles.targetPrompt}>
           <View style={styles.targetPromptIcon}>
-            <MaterialIcons name="track-changes" size={24} color="#FFF" />
+            <MaterialIcons name="radar" size={24} color="#FFF" />
           </View>
           <View style={styles.targetPromptContent}>
             <Text style={styles.targetPromptTitle}>Set Your Target Exam</Text>
@@ -308,14 +308,14 @@ const HomeScreen = () => {
 
       {/* Stats Grid */}
       <View style={styles.statsGrid}>
-        <StatCard title="Questions" value={dashboardData?.total_attempts} icon="target" color={AppColors.primary} />
+        <StatCard title="Questions" value={dashboardData?.total_attempts} icon="checkbox-outline" color={AppColors.primary} />
         <StatCard
           title="Accuracy"
           value={`${dashboardData?.overall_accuracy}%`}
           icon="trending-up"
           color={AppColors.primary}
         />
-        <StatCard title="Streak" value={`${dashboardData?.streak_days} Days`} icon="flash" color={AppColors.warning} />
+        <StatCard title="Streak" value={`${dashboardData?.streak_days} Days`} icon="flame" color={AppColors.warning} />
         <StatCard
           title="Study Time"
           value={`${dashboardData?.study_time_hours}h`}

@@ -1,24 +1,31 @@
-import React from "react";
-import { 
-  ScrollView, 
-  StyleSheet, 
-  View, 
-  SafeAreaView, 
-  KeyboardAvoidingView, 
-  Platform 
-} from "react-native";
-import { 
-  AppButton, 
-  IconButton, 
-  AppCard, 
-  AppText, 
-  AppBadge, 
-  AppColors,
-  AppInput 
+import {
+    AppBadge,
+    AppBottomSheet,
+    AppButton,
+    AppCard,
+    AppColors,
+    AppInput,
+    AppText,
+    IconButton
 } from "@/components/ui";
+import { BottomSheetModal } from "@gorhom/bottom-sheet";
+import React from "react";
+import {
+    KeyboardAvoidingView,
+    Platform,
+    ScrollView,
+    StyleSheet,
+    View
+} from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const ComponentsShowcase = () => {
   const [inputValue, setInputValue] = React.useState("");
+  const bottomSheetRef = React.useRef<BottomSheetModal>(null);
+
+  const handleOpenSheet = () => {
+    bottomSheetRef.current?.present();
+  };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -158,10 +165,33 @@ const ComponentsShowcase = () => {
           />
         </Section>
 
+        <Section title="Bottom Sheets">
+          <AppButton 
+            title="Open Bottom Sheet" 
+            onPress={handleOpenSheet} 
+            variant="primary" 
+            icon="chevron-up" 
+          />
+        </Section>
+
         <View style={{ height: 40 }} />
       </ScrollView>
-      </KeyboardAvoidingView>
-    </SafeAreaView>
+
+      <AppBottomSheet 
+        ref={bottomSheetRef} 
+        title="Sheet Fragment"
+      >
+        <AppText variant="body" style={{ marginBottom: 24 }}>
+          This is a reusable bottom sheet fragment. It supports snap points, backdrops, and native-feeling animations.
+        </AppText>
+        <AppButton 
+          title="Close Sheet" 
+          onPress={() => bottomSheetRef.current?.dismiss()} 
+          variant="secondary" 
+        />
+      </AppBottomSheet>
+    </KeyboardAvoidingView>
+  </SafeAreaView>
   );
 };
 
