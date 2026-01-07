@@ -1,7 +1,8 @@
 import { AppColors } from "@/constants/app-colors";
-import React from "react";
-import { StyleSheet, View, ViewStyle, Pressable } from "react-native";
 import * as Haptics from "expo-haptics";
+import React from "react";
+import { Image, ImageSourcePropType, Pressable, StyleSheet, View, ViewStyle } from "react-native";
+import AppText from "./AppText";
 
 interface AppCardProps {
   children: React.ReactNode;
@@ -12,7 +13,37 @@ interface AppCardProps {
   haptic?: boolean;
 }
 
-const AppCard: React.FC<AppCardProps> = ({
+const CardHeader: React.FC<{ title: string; subtitle?: string; style?: ViewStyle }> = ({
+  title,
+  subtitle,
+  style,
+}) => (
+  <View style={[styles.header, style]}>
+    <AppText variant="h3">{title}</AppText>
+    {subtitle && (
+      <AppText variant="caption" color={AppColors.slate500}>
+        {subtitle}
+      </AppText>
+    )}
+  </View>
+);
+
+const CardContent: React.FC<{ children: React.ReactNode; style?: ViewStyle }> = ({
+  children,
+  style,
+}) => <View style={[styles.content, style]}>{children}</View>;
+
+const CardFooter: React.FC<{ children: React.ReactNode; style?: ViewStyle }> = ({
+  children,
+  style,
+}) => <View style={[styles.footer, style]}>{children}</View>;
+
+const CardCover: React.FC<{ source: ImageSourcePropType; height?: number }> = ({
+  source,
+  height = 180,
+}) => <Image source={source} style={[styles.cover, { height }]} resizeMode="cover" />;
+
+const AppCardComponent: React.FC<AppCardProps> = ({
   children,
   variant = "outline",
   padding = 20,
@@ -33,33 +64,41 @@ const AppCard: React.FC<AppCardProps> = ({
     switch (variant) {
       case "elevated":
         return {
-          backgroundColor: AppColors.slate950,
+          backgroundColor: AppColors.slate800,
           shadowColor: "#000",
           shadowOffset: { width: 0, height: 10 },
-          shadowOpacity: 0.3,
-          shadowRadius: 20,
-          elevation: 10,
+          shadowOpacity: 0.5,
+          shadowRadius: 24,
+          elevation: 12,
+          borderWidth: 1,
+          borderColor: AppColors.slate700,
         };
       case "flat":
         return {
-          backgroundColor: AppColors.slate950,
+          backgroundColor: AppColors.slate900,
+          borderWidth: 1,
+          borderColor: AppColors.slate800,
         };
       case "glass":
         return {
-          backgroundColor: "rgba(15, 23, 42, 0.6)",
+          backgroundColor: "rgba(30, 41, 59, 0.7)",
           borderWidth: 1,
-          borderColor: "rgba(255, 255, 255, 0.05)",
+          borderColor: "rgba(255, 255, 255, 0.15)",
         };
       default: // outline
         return {
-          backgroundColor: AppColors.slate950,
-          borderWidth: 1,
-          borderColor: AppColors.slate900,
+          backgroundColor: AppColors.surfaceDark,
+          borderColor: AppColors.slate700, // Lightened the border for higher visibility
         };
     }
   };
 
   const Component = onPress ? Pressable : View;
+
+  // We check if children are modular or just plain content
+  const isModular = React.Children.toArray(children).some(
+    (child) => React.isValidElement(child) && (child.type === CardCover || child.type === CardHeader)
+  );
 
   return (
     <Component
@@ -67,15 +106,24 @@ const AppCard: React.FC<AppCardProps> = ({
       style={({ pressed }: any) => [
         styles.card,
         getVariantStyles(),
-        { padding },
         onPress && pressed && styles.pressed,
         style,
+        { borderWidth: 1 }, // Ensure border is always applied
+        !isModular && { padding },
       ]}
     >
       {children}
     </Component>
   );
 };
+
+// Compound component pattern
+export const AppCard = Object.assign(AppCardComponent, {
+  Header: CardHeader,
+  Content: CardContent,
+  Footer: CardFooter,
+  Cover: CardCover,
+});
 
 const styles = StyleSheet.create({
   card: {
@@ -85,6 +133,25 @@ const styles = StyleSheet.create({
   pressed: {
     opacity: 0.9,
     transform: [{ scale: 0.99 }],
+  },
+  header: {
+    padding: 20,
+    paddingBottom: 12,
+  },
+  content: {
+    paddingHorizontal: 20,
+    paddingBottom: 20,
+  },
+  footer: {
+    padding: 20,
+    paddingTop: 12,
+    flexDirection: "row",
+    alignItems: "center",
+    borderTopWidth: 1,
+    borderTopColor: AppColors.slate900,
+  },
+  cover: {
+    width: "100%",
   },
 });
 

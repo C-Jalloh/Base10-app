@@ -2,7 +2,7 @@
 
 ## Current Goals
 
-- Working on architectural UI components in the `feature/ui-components/buttons` branch. Standardizing buttons, cards, typography, badges, and inputs to ensure visual consistency across the app. Created a Components Showcase screen for testing.
+- Transitioning to specialized UI components for AI-Tutoring and Mastery Analytics. Initial focus: Setting up the environment for Performance Analytics (Skia/Victory).
 
 ## Current Blockers
 

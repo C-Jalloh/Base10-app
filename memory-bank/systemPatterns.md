@@ -22,3 +22,8 @@ Centralized color tokens in constants/app-colors.ts using a Slate/Emerald palett
 - components/ui/SmartImage.tsx for dynamic assets
 - components/ui/Logo.tsx for brand identity
 - lib/api.ts for mock data and endpoints
+
+
+## AI-Education Specialized Components
+
+Specialized 2026 UI patterns for high-stakes education: Skia-based analytics, Markdown-rendered AI tutoring, and FlashList-powered exam banks.

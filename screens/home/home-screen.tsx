@@ -946,7 +946,7 @@ const styles = StyleSheet.create({
      borderRadius: 24,
      padding: 16,
      borderWidth: 1,
-     borderColor: AppColors.slate900,
+     borderColor: AppColors.slate800,
   },
   radarPlaceholder: {
      height: 160,
@@ -966,7 +966,7 @@ const styles = StyleSheet.create({
       borderRadius: 24,
       padding: 16,
       borderWidth: 1,
-      borderColor: AppColors.slate900,
+      borderColor: AppColors.slate800,
   },
   rankingContent: {
       alignItems: "center",
@@ -1006,7 +1006,7 @@ const styles = StyleSheet.create({
       borderRadius: 24,
       padding: 20,
       borderWidth: 1,
-      borderColor: AppColors.slate900,
+      borderColor: AppColors.slate800,
   },
   subjectCardHeader: {
       flexDirection: "row",
@@ -1097,7 +1097,7 @@ const styles = StyleSheet.create({
       borderRadius: 20,
       padding: 16,
       borderWidth: 1,
-      borderColor: AppColors.slate900,
+      borderColor: AppColors.slate800,
       alignItems: "center",
   },
   analyticsLabel: {

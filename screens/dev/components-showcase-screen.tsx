@@ -95,24 +95,34 @@ const ComponentsShowcase = () => {
 
         <Section title="Cards">
           <AppCard variant="outline" style={styles.cardMargin}>
-            <AppText variant="h3">Outline Card</AppText>
-            <AppText variant="bodySmall" style={{ marginTop: 8 }}>
-              This is the default card variant used for most content blocks.
-            </AppText>
+            <AppCard.Header title="Outline Card" subtitle="Default variant" />
+            <AppCard.Content>
+              <AppText variant="bodySmall">
+                This is the revamped modular card. It now supports headers, content blocks, and footers.
+              </AppText>
+            </AppCard.Content>
+            <AppCard.Footer>
+              <AppButton title="Action" onPress={() => {}} size="sm" variant="ghost" />
+            </AppCard.Footer>
           </AppCard>
 
           <AppCard variant="elevated" style={styles.cardMargin}>
-            <AppText variant="h3">Elevated Card</AppText>
-            <AppText variant="bodySmall" style={{ marginTop: 8 }}>
-              Used when you want the card to stand out with a shadow.
-            </AppText>
+            <AppCard.Cover source={{ uri: 'https://images.unsplash.com/photo-1616469829581-73993eb86b02?q=80&w=800&auto=format&fit=crop' }} />
+            <AppCard.Header title="Elevated with Cover" />
+            <AppCard.Content>
+              <AppText variant="bodySmall">
+                Cards can now have beautiful covers at the top.
+              </AppText>
+            </AppCard.Content>
           </AppCard>
 
-          <AppCard variant="glass" style={styles.cardMargin}>
-            <AppText variant="h3">Glass Card</AppText>
-            <AppText variant="bodySmall" style={{ marginTop: 8 }}>
-              Used for overlays or premium-feeling components.
-            </AppText>
+          <AppCard variant="glass" style={styles.cardMargin} onPress={() => {}}>
+            <AppCard.Header title="Interactive Glass" subtitle="Press me" />
+            <AppCard.Content>
+              <AppText variant="bodySmall">
+                Glass cards are great for overlays. This one has a press handler.
+              </AppText>
+            </AppCard.Content>
           </AppCard>
         </Section>
 
