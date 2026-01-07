@@ -2,7 +2,7 @@
 
 ## Current Goals
 
-- Focusing on the student role and dashboard feature. Working in the `feature/student/dashboard-screen` branch. Identifying areas for improvement in `screens/home/home-screen.tsx`, such as dynamic data fetching and functional navigation for dashboard actions.
+- Working on architectural UI components in the `feature/ui-components/buttons` branch. Standardizing buttons, cards, typography, badges, and inputs to ensure visual consistency across the app. Created a Components Showcase screen for testing.
 
 ## Current Blockers
 

@@ -2,6 +2,7 @@ import { AppColors } from "@/constants/app-colors";
 import { aiApi, authApi, studentApi } from "@/lib/api";
 import { DashboardData, RadarDataPoint, SubjectStat } from "@/types/dashboard";
 import { ProfileData } from "@/types/profile";
+import { AppButton, AppCard, AppText, AppBadge, IconButton } from "@/components/ui";
 import { Ionicons, MaterialCommunityIcons, MaterialIcons } from "@expo/vector-icons";
 import { router } from "expo-router";
 import React, { useEffect, useState } from "react";
@@ -202,10 +203,18 @@ const HomeScreen = () => {
               <Text style={styles.versionText}>v2.0.0</Text>
             </View>
           </View>
-          <TouchableOpacity style={styles.notificationButton}>
-            <Ionicons name="notifications-outline" size={24} color="#FFF" />
-            <View style={styles.notificationBadge} />
-          </TouchableOpacity>
+          <View style={{ flexDirection: 'row', gap: 8 }}>
+            <IconButton 
+              icon="code-working" 
+              onPress={() => router.push("/dev-showcase")} 
+              variant="ghost"
+              size="sm"
+            />
+            <TouchableOpacity style={styles.notificationButton}>
+              <Ionicons name="notifications-outline" size={24} color="#FFF" />
+              <View style={styles.notificationBadge} />
+            </TouchableOpacity>
+          </View>
         </View>
 
         <View style={styles.welcomeSection}>

@@ -1,23 +1,19 @@
-# Progress (Updated: 2025-12-31)
+# Progress (Updated: 2026-01-07)
 
 ## Done
 
 - Admin Tabs & Screens
 - Student Dashboard Redesign
 - Logout Functionality
-- Teacher Branch & Hook Update
-- Teacher Home Screen UI
-- Teacher Classrooms Screen UI
-- Teacher Assignments Screen UI
-- Teacher Analytics Screen UI
-- Teacher Tab Routes & Navigation Logic
-- Teacher AI Assistant Screen & Tab
+- Teacher Role Implementation (Home, Classrooms, Assignments, Analytics, AI)
+- Individual Classroom Portal Redesign (Hero, Meta Grid, Pill Tabs)
 
 ## Doing
 
-- Implementing Teacher role features
+- Building reusable UI Component Library (AppButton, AppCard, AppText, AppBadge, AppInput)
+- Creating Styleguide/Showcase screen for UI consistency verification
 
 ## Next
 
-- Refining Teacher features (e.g., adding actual data fetching)
-- Implementing AI features for teachers
+- Refactor existing screens to use the new AppUI components
+- Implement AI features for teachers and students using new components
