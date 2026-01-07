@@ -1,20 +1,20 @@
 import { AppColors } from '@/constants/app-colors';
-import React, { useState, useCallback } from 'react';
+import React, { useCallback, useState } from 'react';
 
 import {
-  View,
-  Text,
-  TextInput,
-  type TextInputProps,
-  type TextInputContentSizeChangeEvent,
   Keyboard,
   KeyboardAvoidingView,
+  Text,
+  TextInput,
   TouchableWithoutFeedback,
+  View,
+  type TextInputContentSizeChangeEvent,
+  type TextInputProps,
 } from 'react-native';
 
-import { StyleSheet, Platform } from 'react-native';
-import { FieldError } from './FieldError';
 import { deviceBehavior } from '@/utils/helpers';
+import { Platform, StyleSheet } from 'react-native';
+import { FieldError } from './FieldError';
 
 type TextAreaInputProps = Omit<TextInputProps, 'multiline'> & {
   label?: string;
@@ -37,9 +37,22 @@ const TextAreaInput: React.FC<TextAreaInputProps> = ({
   showCount = true,
   error = null,
   style,
+  onFocus,
+  onBlur,
   ...rest
 }) => {
   const [height, setHeight] = useState<number>(minHeight);
+  const [isFocused, setIsFocused] = useState(false);
+
+  const handleFocus = (e: any) => {
+    setIsFocused(true);
+    onFocus?.(e);
+  };
+
+  const handleBlur = (e: any) => {
+    setIsFocused(false);
+    onBlur?.(e);
+  };
 
   const onContentSizeChange = useCallback(
     (e: TextInputContentSizeChangeEvent) => {
@@ -60,16 +73,18 @@ const TextAreaInput: React.FC<TextAreaInputProps> = ({
             value={value}
             onChangeText={onChangeText}
             placeholder={placeholder}
-            placeholderTextColor={AppColors.lightText}
+            placeholderTextColor={AppColors.placeholder}
             multiline
             maxLength={maxLength}
             onContentSizeChange={onContentSizeChange}
+            onFocus={handleFocus}
+            onBlur={handleBlur}
             textAlignVertical='top'
             accessibilityLabel={label ?? 'Text area'}
             style={[
               styles.input,
               { height: Math.max(minHeight, height) },
-              error ? styles.inputError : null,
+              error ? styles.inputError : (isFocused ? styles.inputFocused : null),
               style,
             ]}
           />
@@ -96,21 +111,27 @@ const styles = StyleSheet.create({
   },
   label: {
     marginBottom: 6,
-    color: AppColors.textColor,
+    color: AppColors.textSecondary,
     fontSize: 14,
-    fontWeight: '600',
+    fontFamily: 'MontserratSemiBold',
   },
   input: {
     borderWidth: 1,
-    borderColor: AppColors.lightGray,
-    borderRadius: 8,
+    borderColor: AppColors.slate700,
+    borderRadius: 12,
     paddingHorizontal: 12,
     paddingVertical: Platform.OS === 'ios' ? 12 : 8,
     fontSize: 16,
-    backgroundColor: AppColors.lightGray,
+    backgroundColor: AppColors.slate900,
+    color: AppColors.textPrimary,
+    fontFamily: 'MontserratMedium',
+  },
+  inputFocused: {
+    borderColor: AppColors.primary,
+    borderWidth: 1.5,
   },
   inputError: {
-    borderColor: AppColors.redColor,
+    borderColor: AppColors.error,
   },
   footer: {
     marginTop: 6,
@@ -119,8 +140,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   countText: {
-    color: '#6b7280',
+    color: AppColors.textSecondary,
     fontSize: 12,
+    fontFamily: 'MontserratMedium',
   },
 });
 

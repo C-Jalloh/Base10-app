@@ -1,18 +1,18 @@
 import { AppColors } from "@/constants/app-colors";
-import { authApi } from "@/lib/api";
+import { adminApi } from "@/lib/api";
 import { ProfileData } from "@/types/profile";
 import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 import {
-  ActivityIndicator,
-  ScrollView,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from "react-native";
+    ActivityIndicator,
+    ScrollView,
+    StyleSheet,
+    Text,
+    TouchableOpacity,
+    View
+} from 'react-native';
 
-const HomeScreen = () => {
+const AdminHomeScreen = () => {
   const [profile, setProfile] = useState<ProfileData | null>(null);
   const [loading, setLoading] = useState(true);
 
@@ -22,10 +22,10 @@ const HomeScreen = () => {
 
   const fetchData = async () => {
     try {
-      const response = await authApi.getProfile();
+      const response = await adminApi.getProfile();
       setProfile(response.data);
     } catch (error) {
-      console.error("Failed to fetch student data:", error);
+      console.error("Failed to fetch admin data:", error);
     } finally {
       setLoading(false);
     }
@@ -48,9 +48,9 @@ const HomeScreen = () => {
           </View>
           <View>
             <Text style={styles.brandName}>Base10</Text>
-            <View style={styles.badge}>
+            <View style={styles.adminBadge}>
               <View style={styles.pulseDot} />
-              <Text style={styles.badgeText}>WAEC PRO</Text>
+              <Text style={styles.adminBadgeText}>ADMIN CONSOLE</Text>
             </View>
           </View>
         </View>
@@ -66,44 +66,45 @@ const HomeScreen = () => {
 
       <View style={styles.statsGrid}>
         <StatCard 
-          title="Study Streak" 
-          value="12 Days" 
-          trend="+2" 
-          icon="flame" 
-          color="#F59E0B" 
-        />
-        <StatCard 
-          title="Questions" 
+          title="Total Users" 
           value="1,284" 
-          trend="+45" 
-          icon="help-circle" 
-          color={AppColors.primary} 
-        />
-        <StatCard 
-          title="Rank" 
-          value="#42" 
-          trend="+5" 
-          icon="trophy" 
+          trend="+12%" 
+          icon="people" 
           color="#3B82F6" 
         />
         <StatCard 
-          title="AI Credits" 
-          value="38/50" 
-          trend="Used" 
-          icon="flash" 
-          color="#8B5CF6" 
+          title="Active Now" 
+          value="42" 
+          trend="+5" 
+          icon="pulse" 
+          color={AppColors.primary} 
+        />
+        <StatCard 
+          title="Questions" 
+          value="850" 
+          trend="+24" 
+          icon="help-circle" 
+          color="#F59E0B" 
+        />
+        <StatCard 
+          title="Reports" 
+          value="3" 
+          trend="-2" 
+          icon="alert-circle" 
+          color="#EF4444" 
         />
       </View>
 
       <View style={styles.section}>
         <View style={styles.sectionHeader}>
-          <Text style={styles.sectionTitle}>Learning Path</Text>
+          <Text style={styles.sectionTitle}>Quick Actions</Text>
         </View>
         <View style={styles.actionGrid}>
-          <ActionItem icon="book" label="Classrooms" color="#3B82F6" />
-          <ActionItem icon="chatbubble-ellipses" label="AI Tutor" color={AppColors.primary} />
-          <ActionItem icon="flask" label="Practice" color="#F59E0B" />
-          <ActionItem icon="flash" label="Flashcards" color="#8B5CF6" />
+          <ActionItem icon="person-add" label="Add User" color="#3B82F6" />
+          <ActionItem icon="add-circle" label="New Question" color={AppColors.primary} />
+          <ActionItem icon="shield-checkmark" label="Moderation" color="#F59E0B" />
+          <ActionItem icon="key" label="Roles" color="#8B5CF6" />
+          <ActionItem icon="settings" label="System" color="#64748B" />
         </View>
       </View>
 
@@ -116,16 +117,22 @@ const HomeScreen = () => {
         </View>
         <View style={styles.activityList}>
           <ActivityItem 
-            icon="checkmark-circle" 
-            title="Mathematics Quiz" 
-            time="2 hours ago" 
-            description="Scored 85% in Algebra II" 
+            icon="person-add" 
+            title="New User Registered" 
+            time="2 mins ago" 
+            description="John Doe joined as a student" 
           />
           <ActivityItem 
-            icon="book" 
-            title="New Lesson" 
-            time="5 hours ago" 
-            description="Started 'Introduction to Calculus'" 
+            icon="alert-circle" 
+            title="Content Reported" 
+            time="15 mins ago" 
+            description="Question #452 reported for inaccuracy" 
+          />
+          <ActivityItem 
+            icon="checkmark-circle" 
+            title="System Update" 
+            time="1 hour ago" 
+            description="Database backup completed successfully" 
           />
         </View>
       </View>
@@ -140,7 +147,7 @@ const StatCard = ({ title, value, trend, icon, color }: any) => (
     </View>
     <Text style={styles.statValue}>{value}</Text>
     <Text style={styles.statLabel}>{title}</Text>
-    <Text style={[styles.statTrend, { color: trend.startsWith('+') ? AppColors.primary : AppColors.slate400 }]}>
+    <Text style={[styles.statTrend, { color: trend.startsWith('+') ? AppColors.primary : '#EF4444' }]}>
       {trend}
     </Text>
   </View>
@@ -149,7 +156,7 @@ const StatCard = ({ title, value, trend, icon, color }: any) => (
 const ActionItem = ({ icon, label, color }: any) => (
   <TouchableOpacity style={styles.actionItem}>
     <View style={[styles.actionIcon, { backgroundColor: color + '10' }]}>
-      <Ionicons name={icon} size={28} color={color} />
+      <Ionicons name={icon} size={24} color={color} />
     </View>
     <Text style={styles.actionLabel}>{label}</Text>
   </TouchableOpacity>
@@ -158,7 +165,7 @@ const ActionItem = ({ icon, label, color }: any) => (
 const ActivityItem = ({ icon, title, time, description }: any) => (
   <View style={styles.activityItem}>
     <View style={styles.activityIconContainer}>
-      <Ionicons name={icon} size={20} color={AppColors.primary} />
+      <Ionicons name={icon} size={18} color={AppColors.slate400} />
     </View>
     <View style={styles.activityContent}>
       <View style={styles.activityHeader}>
@@ -177,51 +184,51 @@ const styles = StyleSheet.create({
   },
   loadingContainer: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
     backgroundColor: AppColors.background,
   },
   header: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
     paddingHorizontal: 24,
     paddingTop: 20,
     paddingBottom: 10,
   },
   brandContainer: {
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
     gap: 12,
   },
   logoContainer: {
     width: 44,
     height: 44,
     borderRadius: 12,
-    backgroundColor: "#059669",
-    justifyContent: "center",
-    alignItems: "center",
+    backgroundColor: '#059669', // emerald-600
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   brandName: {
     fontSize: 22,
-    fontWeight: "900",
-    color: "#FFF",
+    fontWeight: '900',
+    color: '#FFF',
     letterSpacing: -0.5,
   },
-  badge: {
-    flexDirection: "row",
-    alignItems: "center",
+  adminBadge: {
+    flexDirection: 'row',
+    alignItems: 'center',
     gap: 6,
   },
   pulseDot: {
     width: 6,
     height: 6,
     borderRadius: 3,
-    backgroundColor: "#10B981",
+    backgroundColor: '#10B981', // emerald-500
   },
-  badgeText: {
+  adminBadgeText: {
     fontSize: 10,
-    fontWeight: "900",
+    fontWeight: '900',
     color: AppColors.slate500,
     letterSpacing: 1.5,
   },
@@ -229,23 +236,29 @@ const styles = StyleSheet.create({
     paddingHorizontal: 24,
     marginBottom: 20,
   },
+  greeting: {
+    fontSize: 28,
+    fontWeight: '900',
+    color: '#FFF',
+    letterSpacing: -0.5,
+  },
   subGreeting: {
     fontSize: 14,
     color: AppColors.slate400,
-    fontWeight: "600",
+    fontWeight: '600',
   },
   notificationButton: {
     width: 48,
     height: 48,
     borderRadius: 16,
     backgroundColor: AppColors.slate900,
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
     borderWidth: 1,
     borderColor: AppColors.slate800,
   },
   notificationBadge: {
-    position: "absolute",
+    position: 'absolute',
     top: 14,
     right: 14,
     width: 8,
@@ -256,14 +269,14 @@ const styles = StyleSheet.create({
     borderColor: AppColors.slate900,
   },
   statsGrid: {
-    flexDirection: "row",
-    flexWrap: "wrap",
+    flexDirection: 'row',
+    flexWrap: 'wrap',
     paddingHorizontal: 16,
     gap: 12,
     marginBottom: 32,
   },
   statCard: {
-    width: "48%",
+    width: '48%',
     backgroundColor: AppColors.slate950,
     borderRadius: 24,
     padding: 20,
@@ -274,83 +287,81 @@ const styles = StyleSheet.create({
     width: 40,
     height: 40,
     borderRadius: 12,
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
     marginBottom: 16,
   },
   statValue: {
     fontSize: 24,
-    fontWeight: "900",
-    color: "#FFF",
+    fontWeight: '900',
+    color: '#FFF',
     marginBottom: 4,
   },
   statLabel: {
     fontSize: 12,
-    fontWeight: "700",
+    fontWeight: '700',
     color: AppColors.slate400,
     marginBottom: 8,
   },
   statTrend: {
     fontSize: 10,
-    fontWeight: "900",
+    fontWeight: '900',
   },
   section: {
     paddingHorizontal: 24,
     marginBottom: 32,
   },
   sectionHeader: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
     marginBottom: 20,
   },
   sectionTitle: {
     fontSize: 20,
-    fontWeight: "900",
-    color: "#FFF",
+    fontWeight: '900',
+    color: '#FFF',
     letterSpacing: -0.5,
   },
   seeAll: {
     fontSize: 14,
-    fontWeight: "700",
+    fontWeight: '700',
     color: AppColors.primary,
   },
   actionGrid: {
-    flexDirection: "row",
-    flexWrap: "wrap",
+    flexDirection: 'row',
+    flexWrap: 'wrap',
     gap: 16,
   },
   actionItem: {
-    width: "22%",
-    alignItems: "center",
+    width: '22%',
+    alignItems: 'center',
     gap: 8,
   },
   actionIcon: {
     width: 60,
     height: 60,
     borderRadius: 20,
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
     borderWidth: 1,
-    borderColor: "rgba(255,255,255,0.05)",
+    borderColor: 'rgba(255,255,255,0.05)',
   },
   actionLabel: {
-    fontSize: 10,
-    fontWeight: "800",
+    fontSize: 11,
+    fontWeight: '800',
     color: AppColors.slate400,
-    textAlign: "center",
-    textTransform: "uppercase",
-    letterSpacing: 0.5,
+    textAlign: 'center',
   },
   activityList: {
-    gap: 12,
+    gap: 16,
   },
   activityItem: {
-    flexDirection: "row",
-    backgroundColor: AppColors.slate950,
-    borderRadius: 20,
-    padding: 16,
+    flexDirection: 'row',
     gap: 16,
+    backgroundColor: AppColors.slate950,
+    padding: 16,
+    borderRadius: 20,
     borderWidth: 1,
     borderColor: AppColors.slate900,
   },
@@ -358,28 +369,28 @@ const styles = StyleSheet.create({
     width: 40,
     height: 40,
     borderRadius: 12,
-    backgroundColor: AppColors.primary + "10",
-    justifyContent: "center",
-    alignItems: "center",
+    backgroundColor: AppColors.slate900,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   activityContent: {
     flex: 1,
   },
   activityHeader: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
     marginBottom: 4,
   },
   activityTitle: {
     fontSize: 14,
-    fontWeight: "700",
-    color: "#FFF",
+    fontWeight: '800',
+    color: '#FFF',
   },
   activityTime: {
     fontSize: 10,
     color: AppColors.slate500,
-    fontWeight: "600",
+    fontWeight: '600',
   },
   activityDescription: {
     fontSize: 12,
@@ -388,4 +399,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default HomeScreen;
+export default AdminHomeScreen;

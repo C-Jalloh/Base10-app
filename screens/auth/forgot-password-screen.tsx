@@ -4,13 +4,13 @@ import { Ionicons } from '@expo/vector-icons';
 import { Link, router } from 'expo-router';
 import React, { useState } from 'react';
 import {
-    Alert,
-    KeyboardAvoidingView,
-    Platform,
-    ScrollView,
-    StyleSheet,
-    Text,
-    View,
+  Alert,
+  KeyboardAvoidingView,
+  Platform,
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
 } from 'react-native';
 
 const ForgotPasswordScreen = () => {
@@ -37,7 +37,8 @@ const ForgotPasswordScreen = () => {
         'If an account with that email exists, a reset link has been sent.',
         [{ text: 'OK', onPress: () => router.replace('/login') }]
       );
-    } catch (err: any) {
+    } catch (error) {
+      console.error("Failed to send reset link:", error);
       Alert.alert('Error', 'Failed to send reset link. Please try again.');
     } finally {
       setLoading(false);
@@ -46,20 +47,25 @@ const ForgotPasswordScreen = () => {
 
   return (
     <KeyboardAvoidingView
-      style={{ flex: 1, width: '100%', backgroundColor: AppColors.background }}
-      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+      style={{ flex: 1, backgroundColor: AppColors.background }}
+      behavior={Platform.OS === 'ios' ? 'padding' : 'padding'}
+      keyboardVerticalOffset={Platform.OS === 'ios' ? 0 : 0}
     >
       {/* Background Decorative Elements */}
       <View style={styles.bgCircle1} />
       <View style={styles.bgCircle2} />
 
       <ScrollView
+        style={{ flex: 1 }}
         contentContainerStyle={{
           flexGrow: 1,
-          justifyContent: 'center',
           paddingHorizontal: 24,
+          paddingBottom: 120, // Significant padding at bottom to allow scrolling past the keyboard
+          paddingTop: 60,
         }}
         keyboardShouldPersistTaps='handled'
+        keyboardDismissMode='on-drag'
+        showsVerticalScrollIndicator={true}
       >
         <View style={styles.headerContainer}>
           <Logo size={56} centered />
@@ -77,7 +83,7 @@ const ForgotPasswordScreen = () => {
           keyboardType='email-address'
           autoCapitalize='none'
           Icon={Ionicons}
-          iconProps={{ name: 'mail', color: AppColors.slate400 }}
+          iconProps={{ name: 'mail' }}
         />
 
         <View style={{ height: 24 }} />

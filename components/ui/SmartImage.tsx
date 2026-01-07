@@ -6,13 +6,15 @@ import React, { useState } from 'react';
 import { ActivityIndicator, StyleSheet, View } from 'react-native';
 
 interface SmartImageProps {
-  filename: string;
+  filename?: string;
+  uri?: string;
   alt?: string;
   style?: any;
   quality?: 'low' | 'medium' | 'high' | 'auto';
+  placeholder?: string;
 }
 
-export const SmartImage = ({ filename, alt, style, quality = 'auto' }: SmartImageProps) => {
+export const SmartImage = ({ filename, uri, alt, style, quality = 'auto', placeholder }: SmartImageProps) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
 
@@ -20,20 +22,20 @@ export const SmartImage = ({ filename, alt, style, quality = 'auto' }: SmartImag
   // For now we'll default to 'wifi' or 'high'
   const networkType = 'wifi'; 
 
-  const imageUrl = assetApi.getImageUrl(filename, { 
+  const imageUrl = uri || (filename ? assetApi.getImageUrl(filename, { 
     quality: quality === 'auto' ? undefined : quality,
     network: networkType 
-  });
+  }) : placeholder);
 
   return (
     <View style={[styles.container, style]}>
-      {loading && (
+      {loading && imageUrl && (
         <View style={styles.loaderContainer}>
           <ActivityIndicator color={AppColors.primary} />
         </View>
       )}
       
-      {error ? (
+      {error || !imageUrl ? (
         <View style={styles.errorContainer}>
           <Ionicons name="image-outline" size={24} color={AppColors.slate400} />
         </View>

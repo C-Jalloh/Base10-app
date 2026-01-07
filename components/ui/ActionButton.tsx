@@ -16,7 +16,7 @@ const ActionButton = ({
   text,
   width,
   backgroundColor = AppColors.primary,
-  color = AppColors.textInverted,
+  color = AppColors.textPrimary,
   children,
 }: {
   isEnabled: boolean;
@@ -29,6 +29,9 @@ const ActionButton = ({
 }) => {
   const animatedButtonOpacity = useRef(new Animated.Value(0.5)).current;
   const animatedButtonScale = useRef(new Animated.Value(1)).current;
+
+  // Use the color prop directly
+  const textColor = color;
 
   useEffect(() => {
     if (isEnabled) {
@@ -93,7 +96,7 @@ const ActionButton = ({
         {children ? (
           children
         ) : (
-          <Text style={{ ...actionButtonStyles.buttonText, color }}>
+          <Text style={{ ...actionButtonStyles.buttonText, color: textColor }}>
             {text}
           </Text>
         )}
