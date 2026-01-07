@@ -1,24 +1,23 @@
-# Progress (Updated: 2025-12-29)
+# Progress (Updated: 2025-12-31)
 
 ## Done
 
-- Initialize project
-- Implement OLED-optimized "Deep Emerald" color palette
-- Update UI components (ActionButton, TextInputField, FieldError) with new theme
-- Replicate web design for Login, Register, and Forgot Password screens
-- Create mock API layer in lib/api.ts
-- Migrate SVG assets from web project
-- Implement SmartImage and Logo components for brand consistency
-- Create start-app.sh for reliable mobile connectivity
+- Admin Tabs & Screens
+- Student Dashboard Redesign
+- Logout Functionality
+- Teacher Branch & Hook Update
+- Teacher Home Screen UI
+- Teacher Classrooms Screen UI
+- Teacher Assignments Screen UI
+- Teacher Analytics Screen UI
+- Teacher Tab Routes & Navigation Logic
+- Teacher AI Assistant Screen & Tab
 
 ## Doing
 
-- Finalizing mock API integration for Auth screens
-- Testing asset management with SmartImage and Logo components
+- Implementing Teacher role features
 
 ## Next
 
-- Implement actual authentication with backend API
-- Develop the Home/Dashboard screen UI
-- Implement AI chat interface features
-- Set up state management (e.g., Zustand or Context API) for user session
+- Refining Teacher features (e.g., adding actual data fetching)
+- Implementing AI features for teachers

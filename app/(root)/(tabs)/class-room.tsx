@@ -1,15 +1,24 @@
+import { AppColors } from "@/constants/app-colors";
+import { useAuth } from "@/hooks/useAuth";
+import ClassRoomScreen from "@/screens/class-room/class-room-screen";
+import { Redirect } from "expo-router";
 import React from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
-import ClassRoomScreen from "@/screens/class-room/class-room-screen";
 
 const Screen = () => {
+  const { isAdmin, loading } = useAuth();
+
+  if (loading) return null;
+
+  if (isAdmin) {
+    return <Redirect href="/(root)/(tabs)/home" />;
+  }
+
   return (
     <SafeAreaView
       style={{
         flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-        backgroundColor: "#121212",
+        backgroundColor: AppColors.background,
       }}
     >
       <ClassRoomScreen />

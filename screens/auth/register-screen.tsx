@@ -10,7 +10,7 @@ import {
     ScrollView,
     StyleSheet,
     Text,
-    View,
+    View
 } from 'react-native';
 
 const RegisterScreen = () => {
@@ -80,21 +80,25 @@ const RegisterScreen = () => {
 
   return (
     <KeyboardAvoidingView
-      style={{ flex: 1, width: '100%', backgroundColor: AppColors.background }}
-      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+      style={{ flex: 1, backgroundColor: AppColors.background }}
+      behavior={Platform.OS === 'ios' ? 'padding' : 'padding'}
+      keyboardVerticalOffset={Platform.OS === 'ios' ? 0 : 0}
     >
       {/* Background Decorative Elements */}
       <View style={styles.bgCircle1} />
       <View style={styles.bgCircle2} />
 
       <ScrollView
+        style={{ flex: 1 }}
         contentContainerStyle={{
           flexGrow: 1,
-          justifyContent: 'center',
           paddingHorizontal: 24,
-          paddingVertical: 40,
+          paddingBottom: 120, // Significant padding at bottom to allow scrolling past the keyboard
+          paddingTop: 40,
         }}
         keyboardShouldPersistTaps='handled'
+        keyboardDismissMode='on-drag'
+        showsVerticalScrollIndicator={true}
       >
         <View style={styles.headerContainer}>
           <Logo size={56} centered />
@@ -109,7 +113,7 @@ const RegisterScreen = () => {
           onChangeText={setName}
           autoCapitalize='words'
           Icon={Ionicons}
-          iconProps={{ name: 'person', color: AppColors.slate400 }}
+          iconProps={{ name: 'person' }}
         />
 
         <View style={{ height: 12 }} />
@@ -121,7 +125,7 @@ const RegisterScreen = () => {
           onChangeText={setPhone}
           keyboardType='phone-pad'
           Icon={Ionicons}
-          iconProps={{ name: 'call', color: AppColors.slate400 }}
+          iconProps={{ name: 'call' }}
         />
 
         <View style={{ height: 12 }} />
@@ -134,7 +138,7 @@ const RegisterScreen = () => {
           keyboardType='email-address'
           autoCapitalize='none'
           Icon={Ionicons}
-          iconProps={{ name: 'mail', color: AppColors.slate400 }}
+          iconProps={{ name: 'mail' }}
         />
 
         <View style={{ height: 12 }} />
@@ -146,7 +150,7 @@ const RegisterScreen = () => {
           onChangeText={setPassword}
           secureTextEntry
           Icon={Ionicons}
-          iconProps={{ name: 'lock-closed', color: AppColors.slate400 }}
+          iconProps={{ name: 'lock-closed' }}
         />
 
         <View style={{ height: 12 }} />

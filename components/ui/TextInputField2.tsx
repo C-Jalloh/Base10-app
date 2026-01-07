@@ -1,17 +1,17 @@
+import { AppColors } from '@/constants/app-colors';
+import { textInputStyles } from '@/styles/textInput-styles';
+import type { InputFieldProps } from '@/types/inputs';
+import { deviceBehavior } from '@/utils/helpers';
 import type { FC } from 'react';
 import React, { useState } from 'react';
 import {
+  Keyboard,
   KeyboardAvoidingView,
-  TouchableWithoutFeedback,
-  View,
   Text,
   TextInput,
-  Keyboard,
+  TouchableWithoutFeedback,
+  View,
 } from 'react-native';
-import { deviceBehavior } from '@/utils/helpers';
-import { textInputStyles } from '@/styles/textInput-styles';
-import type { InputFieldProps } from '@/types/inputs';
-import { TAppColors } from '@/constants/TAppColors';
 
 const TextInputField2: FC<InputFieldProps> = ({
   inputStyle,
@@ -27,12 +27,26 @@ const TextInputField2: FC<InputFieldProps> = ({
   placeholder,
   className,
   Icon,
+  iconProps,
   width = 30,
   height = 24,
   error,
+  onFocus,
+  onBlur,
   ...props
 }) => {
   const [hidePassword] = useState(secureTextEntry);
+  const [isFocused, setIsFocused] = useState(false);
+
+  const handleFocus = (e: any) => {
+    setIsFocused(true);
+    onFocus?.(e);
+  };
+
+  const handleBlur = (e: any) => {
+    setIsFocused(false);
+    onBlur?.(e);
+  };
 
   return (
     <KeyboardAvoidingView behavior={deviceBehavior()}>
@@ -54,9 +68,21 @@ const TextInputField2: FC<InputFieldProps> = ({
               textInputStyles.inputContainer,
               error
                 ? textInputStyles.errorBorder
-                : textInputStyles.defaultBorder,
+                : isFocused
+                  ? { borderColor: AppColors.primary, borderWidth: 1.5 }
+                  : textInputStyles.defaultBorder,
             ]}
           >
+            {Icon && (
+              <View style={[textInputStyles.iconContainer]}>
+                <Icon
+                  size={24}
+                  name={iconProps?.name as any}
+                  {...iconProps}
+                  color={isFocused ? AppColors.iconActive : AppColors.iconInactive}
+                />
+              </View>
+            )}
             <TextInput
               style={[textInputStyles.textInput, inputStyle]}
               secureTextEntry={hidePassword}
@@ -66,7 +92,9 @@ const TextInputField2: FC<InputFieldProps> = ({
               autoCapitalize='none'
               spellCheck={false}
               clearButtonMode='while-editing'
-              placeholderTextColor={TAppColors.textColor}
+              placeholderTextColor={AppColors.placeholder}
+              onFocus={handleFocus}
+              onBlur={handleBlur}
               {...props}
             />
           </View>
